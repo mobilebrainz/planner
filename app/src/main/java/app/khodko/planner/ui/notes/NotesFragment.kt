@@ -1,4 +1,4 @@
-package app.khodko.planner.ui.calendar
+package app.khodko.planner.ui.notes
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import app.khodko.planner.core.BaseFragment
 import app.khodko.planner.core.extension.getViewModelExt
 import app.khodko.planner.core.extension.navigateExt
-import app.khodko.planner.databinding.FragmentCalendarBinding
+import app.khodko.planner.databinding.FragmentNotesBinding
 
-class CalendarFragment : BaseFragment() {
+class NotesFragment : BaseFragment() {
 
-    private var _binding: FragmentCalendarBinding? = null
+    private var _binding: FragmentNotesBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var calendarViewModel: CalendarViewModel
+    private lateinit var notesViewModel: NotesViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentCalendarBinding.inflate(inflater, container, false)
-        calendarViewModel = getViewModelExt { CalendarViewModel() }
+        _binding = FragmentNotesBinding.inflate(inflater, container, false)
+        notesViewModel = getViewModelExt { NotesViewModel() }
 
         initListeners()
 
@@ -26,8 +26,8 @@ class CalendarFragment : BaseFragment() {
     }
 
     private fun initListeners() {
-        binding.btnEvent.setOnClickListener {
-            navigateExt(CalendarFragmentDirections.actionNavCalendarToNavEvent())
+        binding.btnNote.setOnClickListener {
+            navigateExt(NotesFragmentDirections.actionNavNotesToNavNote())
         }
     }
 

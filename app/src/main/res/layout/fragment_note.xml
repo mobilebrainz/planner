@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="6dp"
-    tools:context=".ui.calendar.CalendarFragment">
+    tools:context=".ui.note.NoteFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,15 +17,8 @@
             android:id="@+id/text_gallery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Calendar"
+            android:text="Note"
             android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/btn_event"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Event"/>
-
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
