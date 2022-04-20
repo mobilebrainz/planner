@@ -27,5 +27,9 @@
     <string name="name_hint">Name</string>
     <string name="password_hint">Password</string>
     <string name="email_hint">Email</string>
+    <string name="name_field_error">Name field is required!</string>
+    <string name="email_field_error">Email field is required!</string>
+    <string name="password_field_error">Password field is required!</string>
+    <string name="registr_error_exists">Such user already exists!</string>
 
 </resources>

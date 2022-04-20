@@ -1,5 +1,6 @@
 package app.khodko.planner.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -10,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import app.khodko.planner.R
 import app.khodko.planner.databinding.ActivityLoginBinding
 
+const val USER_ID_PREF = "USER_ID_PREF"
 
 class LoginActivity : AppCompatActivity() {
 
@@ -30,8 +32,17 @@ class LoginActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        checkUserId()
 
+        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+    }
+
+    private fun checkUserId() {
+        val userId = getSharedPreferences(USER_ID_PREF, 0).getLong(USER_ID_PREF, -1)
+        if (userId > 0) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

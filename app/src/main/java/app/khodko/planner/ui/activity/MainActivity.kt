@@ -1,9 +1,12 @@
 package app.khodko.planner.ui.activity
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -22,18 +25,11 @@ class MainActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        /*
-        binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-         */
         navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -43,6 +39,8 @@ class MainActivity : AppCompatActivity(),
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
         binding.navView.setNavigationItemSelectedListener(this)
+
+        checkUserId()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -65,6 +63,18 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun logOut() {
-        val i = 0
+        getSharedPreferences(USER_ID_PREF, 0).edit { clear() }
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
+    }
+
+    private fun checkUserId() {
+        val userId = getSharedPreferences(USER_ID_PREF, 0).getLong(USER_ID_PREF, -1)
+        if (userId > 0) {
+            // todo: get user from room
+
+        } else {
+            logOut()
+        }
     }
 }
