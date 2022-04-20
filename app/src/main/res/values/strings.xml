@@ -31,5 +31,8 @@
     <string name="email_field_error">Email field is required!</string>
     <string name="password_field_error">Password field is required!</string>
     <string name="registr_error_exists">Such user already exists!</string>
+    <string name="image_desc_image">Image</string>
+    <string name="permission_requied">Permission required</string>
+    <string name="perm_read_external_storage_message">Permission to access the external storage is required for this app to load images.</string>
 
 </resources>

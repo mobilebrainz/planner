@@ -1,11 +1,11 @@
 package app.khodko.planner.ui.activity
 
-import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.edit
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
@@ -15,13 +15,14 @@ import app.khodko.planner.R
 import app.khodko.planner.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity(),
-    NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BasePermissionActivity(),
+    NavigationView.OnNavigationItemSelectedListener,
+    ImageChooserInterface {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-
+    private var imageChooserResponse: ((Uri?) -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,5 +77,16 @@ class MainActivity : AppCompatActivity(),
         } else {
             logOut()
         }
+    }
+
+    private val imageChooserResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        imageChooserResponse?.invoke(result.data?.data)
+    }
+
+    override fun showImageChooser(response: (Uri?) -> Unit) {
+        imageChooserResponse = response
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        imageChooserResult.launch(intent)
     }
 }
