@@ -9,7 +9,6 @@ import app.khodko.planner.App
 import app.khodko.planner.R
 import app.khodko.planner.core.BaseFragment
 import app.khodko.planner.core.extension.getViewModelExt
-import app.khodko.planner.data.StoreUserId
 import app.khodko.planner.data.entity.User
 import app.khodko.planner.databinding.FragmentRegistrationBinding
 import app.khodko.planner.ui.activity.MainActivity
