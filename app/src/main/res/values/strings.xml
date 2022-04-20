@@ -17,5 +17,15 @@
     <string name="menu_profile">Profile</string>
     <string name="menu_about">About</string>
     <string name="menu_logout">LogOut</string>
+    <string name="label_login">LogIn</string>
+    <string name="label_registration">Registration</string>
+
+    <string name="login_btn">LogIn</string>
+    <string name="registration_btn">Registration</string>
+    <string name="registr_btn">Registr</string>
+    <string name="helper_text_requied">Requied*</string>
+    <string name="name_hint">Name</string>
+    <string name="password_hint">Password</string>
+    <string name="email_hint">Email</string>
 
 </resources>

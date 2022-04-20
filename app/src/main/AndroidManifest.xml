@@ -17,9 +17,16 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Planner.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
             android:name=".ui.activity.MainActivity"
