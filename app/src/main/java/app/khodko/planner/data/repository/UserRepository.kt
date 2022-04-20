@@ -23,10 +23,7 @@ class UserRepository(private val userDao: UserDao) {
     suspend fun existUser(name: String, email: String) = userDao.existUser(name, email)
 
     @WorkerThread
-    suspend fun getUser(user: User) = userDao.getUser(user.email, user.password)
-
-    @WorkerThread
-    suspend fun getUser(email: String, password: String) = userDao.getUser(email, password)
+    suspend fun getUser(name: String, password: String) = userDao.getUser(name, password)
 
     @WorkerThread
     suspend fun getUser(id: Long) = userDao.getUser(id)

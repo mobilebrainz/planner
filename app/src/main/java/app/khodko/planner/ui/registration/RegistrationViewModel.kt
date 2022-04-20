@@ -14,14 +14,8 @@ class RegistrationViewModel(private val userRepository: UserRepository) : ViewMo
     private val _existUser = SingleLiveEvent<Boolean>()
     val existUser: LiveData<Boolean> = _existUser
 
-    private val _loginError = SingleLiveEvent<Boolean>()
-    val loginError: LiveData<Boolean> = _loginError
-
     private val _userId = MutableLiveData<Long>()
     val userId: LiveData<Long> = _userId
-    fun setUserId(id: Long) {
-        _userId.value = id
-    }
 
     fun save(user: User) {
         viewModelScope.launch {

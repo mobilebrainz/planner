@@ -19,8 +19,8 @@ interface UserDao {
     @Query("SELECT * FROM user WHERE name = :name OR email = :email")
     suspend fun existUser(name: String, email: String): List<User>
 
-    @Query("SELECT * FROM user WHERE email = :email AND password = :password")
-    suspend fun getUser(email: String, password: String): List<User>
+    @Query("SELECT * FROM user WHERE name = :name AND password = :password")
+    suspend fun getUser(name: String, password: String): List<User>
 
     @Query("SELECT * FROM user WHERE id = :id")
     suspend fun getUser(id: Long): List<User>
