@@ -37,4 +37,16 @@
         android:label="@string/menu_note"
         tools:layout="@layout/fragment_note" />
 
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="app.khodko.planner.ui.profile.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="app.khodko.planner.ui.about.AboutFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_about" />
+
 </navigation>
