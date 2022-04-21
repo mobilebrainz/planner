@@ -40,4 +40,14 @@
     <string name="switch_themes">Night Theme</string>
     <string name="user_saved">User saved successfully!</string>
 
+    <string name="info_view"><![CDATA[
+        <h4>Лабораторна работа №4 (Планировщик)</h4>
+        <p>
+        Учреждение: БГУИР <br>
+        Группа: №2 <br>
+        Предмет: Мобильная разработка <br>
+        Разработчик: Ходько Екатерина Александровна <br>
+        </p>
+    ]]></string>
+
 </resources>

@@ -63,6 +63,14 @@ class MainActivity : BasePermissionActivity(),
         return handled
     }
 
+    override fun onBackPressed() {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     private fun logOut() {
         getSharedPreferences(USER_ID_PREF, 0).edit { clear() }
         startActivity(Intent(this, LoginActivity::class.java))
@@ -71,10 +79,7 @@ class MainActivity : BasePermissionActivity(),
 
     private fun checkUserId() {
         val userId = getSharedPreferences(USER_ID_PREF, 0).getLong(USER_ID_PREF, -1)
-        if (userId > 0) {
-            // todo: get user from room
-
-        } else {
+        if (userId <= 0) {
             logOut()
         }
     }
