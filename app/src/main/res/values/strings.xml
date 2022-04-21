@@ -42,6 +42,9 @@
     <string name="logout_btn">Log Out</string>
     <string name="switch_themes">Night Theme</string>
     <string name="user_saved">User saved successfully!</string>
+    <string name="note_saved">Note saved successfully!</string>
+    <string name="tittle_field_error">Tittle field is required!</string>
+    <string name="note_field_error">Note field is required!</string>
 
     <string name="info_view"><![CDATA[
         <h4>Лабораторна работа №4 (Планировщик)</h4>

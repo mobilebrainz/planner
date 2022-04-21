@@ -73,7 +73,6 @@ class ProfileFragment : BaseFragment() {
         profileViewModel.savedUser.observe(viewLifecycleOwner) {
             showInfoSnackbar(R.string.user_saved)
         }
-
         profileViewModel.user.observe(viewLifecycleOwner) {
             it?.let { u ->
                 binding.editTextName.setText(u.name)
