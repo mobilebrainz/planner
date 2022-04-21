@@ -9,7 +9,7 @@
         android:id="@+id/nav_calendar"
         android:name="app.khodko.planner.ui.calendar.CalendarFragment"
         android:label="@string/menu_calendar"
-        tools:layout="@layout/fragment_calendar" >
+        tools:layout="@layout/fragment_calendar">
         <action
             android:id="@+id/action_nav_calendar_to_nav_event"
             app:destination="@id/nav_event" />
@@ -25,17 +25,39 @@
         android:id="@+id/nav_notes"
         android:name="app.khodko.planner.ui.notes.NotesFragment"
         android:label="@string/menu_notes"
-        tools:layout="@layout/fragment_notes" >
+        tools:layout="@layout/fragment_notes">
         <action
             android:id="@+id/action_nav_notes_to_nav_note"
             app:destination="@id/nav_note" />
+        <action
+            android:id="@+id/action_nav_notes_to_nav_add_note"
+            app:destination="@id/nav_add_note" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_note"
         android:name="app.khodko.planner.ui.note.NoteFragment"
         android:label="@string/menu_note"
-        tools:layout="@layout/fragment_note" />
+        tools:layout="@layout/fragment_note">
+        <argument
+            android:name="id"
+            app:argType="long"
+            app:nullable="false" />
+        <action
+            android:id="@+id/action_nav_note_to_nav_add_note"
+            app:destination="@id/nav_add_note" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_add_note"
+        android:name="app.khodko.planner.ui.addnote.AddNoteFragment"
+        android:label="@string/label_add_note"
+        tools:layout="@layout/fragment_add_note">
+        <argument
+            android:name="id"
+            android:defaultValue="-1L"
+            app:argType="long" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_profile"
