@@ -45,6 +45,9 @@
     <string name="note_saved">Note saved successfully!</string>
     <string name="tittle_field_error">Tittle field is required!</string>
     <string name="note_field_error">Note field is required!</string>
+    <string name="no_results">No results 😓</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_delete">Delete</string>
 
     <string name="info_view"><![CDATA[
         <h4>Лабораторна работа №4 (Планировщик)</h4>

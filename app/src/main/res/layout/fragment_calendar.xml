@@ -20,12 +20,6 @@
             android:text="Calendar"
             android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/btn_event"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Event"/>
-
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

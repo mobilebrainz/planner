@@ -9,7 +9,6 @@ import app.khodko.planner.R
 import app.khodko.planner.core.BaseFragment
 import app.khodko.planner.core.extension.getViewModelExt
 import app.khodko.planner.data.entity.Note
-import app.khodko.planner.data.entity.User
 import app.khodko.planner.databinding.FragmentAddNoteBinding
 import java.text.SimpleDateFormat
 import java.util.*

@@ -1,14 +1,32 @@
 package app.khodko.planner.ui.notes
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import app.khodko.planner.data.entity.Note
 import app.khodko.planner.data.repository.NoteRepository
+import kotlinx.coroutines.launch
 
 class NotesViewModel(
     private val noteRepository: NoteRepository,
     val userId: Long
 ) : ViewModel() {
 
-    init {
+    private val _notes = MutableLiveData<List<Note>>()
+    val notes: LiveData<List<Note>> = _notes
 
+    fun delete(note: Note) {
+        viewModelScope.launch {
+            noteRepository.delete(note)
+            _notes.value = noteRepository.getNotes(userId)
+        }
     }
+
+    fun load() {
+        viewModelScope.launch {
+            _notes.value = noteRepository.getNotes(userId)
+        }
+    }
+
 }

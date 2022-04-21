@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import app.khodko.planner.R
 import app.khodko.planner.core.BaseFragment
 import app.khodko.planner.core.extension.getViewModelExt
 import app.khodko.planner.core.extension.navigateExt
@@ -16,7 +17,11 @@ class CalendarFragment : BaseFragment() {
 
     private lateinit var calendarViewModel: CalendarViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentCalendarBinding.inflate(inflater, container, false)
         calendarViewModel = getViewModelExt { CalendarViewModel() }
 
@@ -25,10 +30,16 @@ class CalendarFragment : BaseFragment() {
         return binding.root
     }
 
-    private fun initListeners() {
-        binding.btnEvent.setOnClickListener {
+    override fun initFab() {
+        fab.setImageResource(R.drawable.ic_add_24)
+        fab.show()
+        fab.setOnClickListener {
             navigateExt(CalendarFragmentDirections.actionNavCalendarToNavEvent())
         }
+    }
+
+    private fun initListeners() {
+
     }
 
     override fun onDestroyView() {

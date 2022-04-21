@@ -30,10 +30,18 @@
         <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/layout/fragment_signin.xml" value="0.15830800405268491" />
         <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/menu/activity_main_drawer.xml" value="0.32051282051282054" />
         <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/menu/main.xml" value="0.32051282051282054" />
+        <entry key="..\:/Projects/Android/planner/app/src/main/res/drawable/ic_calendar_24.xml" value="0.1" />
+        <entry key="..\:/Projects/Android/planner/app/src/main/res/drawable/ic_delete_24.xml" value="0.1" />
         <entry key="..\:/Projects/Android/planner/app/src/main/res/drawable/ic_done_24.xml" value="0.1" />
+        <entry key="..\:/Projects/Android/planner/app/src/main/res/drawable/ic_edit_24.xml" value="0.1" />
         <entry key="..\:/Projects/Android/planner/app/src/main/res/drawable/ic_image_outline_24.xml" value="0.1" />
+        <entry key="..\:/Projects/Android/planner/app/src/main/res/layout/fragment_calendar.xml" value="0.24456521739130435" />
         <entry key="..\:/Projects/Android/planner/app/src/main/res/layout/fragment_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Projects/Android/planner/app/src/main/res/layout/fragment_note.xml" value="0.24456521739130435" />
+        <entry key="..\:/Projects/Android/planner/app/src/main/res/layout/fragment_notes.xml" value="0.36666666666666664" />
         <entry key="..\:/Projects/Android/planner/app/src/main/res/layout/fragment_registration.xml" value="0.25" />
+        <entry key="..\:/Projects/Android/planner/app/src/main/res/layout/note_view_item.xml" value="0.24456521739130435" />
+        <entry key="..\:/Projects/Android/planner/app/src/main/res/menu/note_fragment_options_menu.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

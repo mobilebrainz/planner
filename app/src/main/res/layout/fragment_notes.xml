@@ -8,18 +8,26 @@
     android:padding="6dp"
     tools:context=".ui.notes.NotesFragment">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        tools:context=".ui.favorites.FavoritesFragment">
 
         <TextView
-            android:id="@+id/text_gallery"
+            android:id="@+id/emptyList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Notes"
-            android:textSize="20sp" />
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/no_results"
+            android:textSize="24sp"
+            android:visibility="gone" />
 
-    </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+
+    </FrameLayout>
 
 </androidx.core.widget.NestedScrollView>

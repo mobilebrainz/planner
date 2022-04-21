@@ -14,11 +14,27 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/text_gallery"
+            android:id="@+id/tittleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Note"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/dateView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp" />
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

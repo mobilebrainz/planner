@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.khodko.planner.core.viewmodel.SingleLiveEvent
 import app.khodko.planner.data.entity.Note
-import app.khodko.planner.data.entity.User
 import app.khodko.planner.data.repository.NoteRepository
 import kotlinx.coroutines.launch
 
