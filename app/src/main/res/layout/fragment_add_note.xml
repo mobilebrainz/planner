@@ -13,12 +13,53 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/text_gallery"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Note"
-            android:textSize="20sp" />
+            android:textColorHint="@color/colorAccent"
+            app:counterEnabled="true"
+            app:counterMaxLength="128"
+            app:counterTextColor="@color/colorAccent"
+            app:helperText="@string/helper_text_requied"
+            app:helperTextTextColor="@color/textColorRequied">
+
+            <EditText
+                android:id="@+id/editTittle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tittle_hint"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:paddingHorizontal="5dp"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textColorHint="@color/colorAccent"
+            app:counterTextColor="@color/colorAccent">
+
+            <EditText
+                android:id="@+id/editNote"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="top"
+                android:hint="@string/note_hint"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

@@ -26,6 +26,8 @@
     <string name="registr_btn">Registr</string>
     <string name="helper_text_requied">Requied*</string>
     <string name="name_hint">Name</string>
+    <string name="tittle_hint">Tittle</string>
+    <string name="note_hint">Note</string>
     <string name="password_hint">Password</string>
     <string name="email_hint">Email</string>
     <string name="name_field_error">Name field is required!</string>
