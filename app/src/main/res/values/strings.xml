@@ -35,5 +35,9 @@
     <string name="image_desc_image">Image</string>
     <string name="permission_requied">Permission required</string>
     <string name="perm_read_external_storage_message">Permission to access the external storage is required for this app to load images.</string>
+    <string name="save_btn">Save</string>
+    <string name="logout_btn">Log Out</string>
+    <string name="switch_themes">Night Theme</string>
+    <string name="user_saved">User saved successfully!</string>
 
 </resources>

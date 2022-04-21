@@ -1,5 +1,6 @@
 package app.khodko.planner.core
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
@@ -8,8 +9,8 @@ import androidx.annotation.MainThread
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import app.khodko.planner.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import app.khodko.planner.ui.activity.LoginActivity
+import app.khodko.planner.ui.activity.USER_ID_PREF
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE
 import com.google.android.material.snackbar.Snackbar.LENGTH_LONG
@@ -18,11 +19,21 @@ abstract class BaseFragment : Fragment() {
 
     private var errorSnackbar: Snackbar? = null
     private var infoSnackbar: Snackbar? = null
+
     protected lateinit var sharedPreferences: SharedPreferences
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initNightTheme()
+    }
+
+    protected fun checkUserId(): Long {
+        val userId = requireActivity().getSharedPreferences(USER_ID_PREF, 0).getLong(USER_ID_PREF, -1)
+        if (userId < 0) {
+            startActivity(Intent(context, LoginActivity::class.java))
+            requireActivity().finish()
+        }
+        return userId
     }
 
     private fun initNightTheme() {
@@ -39,22 +50,17 @@ abstract class BaseFragment : Fragment() {
         duration: Int = LENGTH_LONG,
         maxLines: Int = 2
     ) {
-        val bottomView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
-        bottomView?.let { b ->
-            view?.let { v ->
-                infoSnackbar = Snackbar.make(v, resId, duration).apply {
-                    anchorView = b
-                    if (maxLines > 2) {
-                        //todo: in future android updates check R.id.snackbar_text
-                        val textView =
-                            v.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
-                        textView.maxLines = maxLines
-                    }
-                    show()
+        view?.let {
+            infoSnackbar = Snackbar.make(it, resId, duration).apply {
+                if (maxLines > 2) {
+                    //todo: in future android updates check R.id.snackbar_text
+                    val textView =
+                        view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+                    textView.maxLines = maxLines
                 }
+                show()
             }
         }
-
     }
 
     @MainThread
@@ -63,15 +69,10 @@ abstract class BaseFragment : Fragment() {
         @StringRes actionResId: Int,
         listener: (v: View) -> Unit
     ) {
-        val bottomView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
-        bottomView?.let { b ->
-            view?.let { v ->
-                errorSnackbar = Snackbar.make(v, messageResId, LENGTH_INDEFINITE)
-                errorSnackbar!!.anchorView = b
-                errorSnackbar?.setAction(actionResId, View.OnClickListener(listener::invoke))?.show()
-            }
+        view?.let {
+            errorSnackbar = Snackbar.make(it, messageResId, LENGTH_INDEFINITE)
+            errorSnackbar?.setAction(actionResId, View.OnClickListener(listener::invoke))?.show()
         }
-
     }
 
     protected fun dismissErrorSnackbar() {
