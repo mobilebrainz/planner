@@ -13,11 +13,13 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import app.khodko.planner.R
 import app.khodko.planner.databinding.ActivityMainBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : BasePermissionActivity(),
     NavigationView.OnNavigationItemSelectedListener,
-    ImageChooserInterface {
+    ImageChooserInterface,
+    FabActivity {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -43,6 +45,8 @@ class MainActivity : BasePermissionActivity(),
 
         checkUserId()
     }
+
+    override fun getFab(): FloatingActionButton = binding.appBarMain.fab
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()

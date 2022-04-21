@@ -9,8 +9,11 @@ import androidx.annotation.MainThread
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import app.khodko.planner.core.extension.hideSoftKeyboardExt
+import app.khodko.planner.ui.activity.FabActivity
 import app.khodko.planner.ui.activity.LoginActivity
 import app.khodko.planner.ui.activity.USER_ID_PREF
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE
 import com.google.android.material.snackbar.Snackbar.LENGTH_LONG
@@ -21,10 +24,22 @@ abstract class BaseFragment : Fragment() {
     private var infoSnackbar: Snackbar? = null
 
     protected lateinit var sharedPreferences: SharedPreferences
+    protected lateinit var fab: FloatingActionButton
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initNightTheme()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        hideSoftKeyboardExt()
+
+        if (activity is FabActivity) {
+            fab = (activity as FabActivity).getFab()
+            fab.visibility = View.GONE
+            initFab()
+        }
     }
 
     protected fun checkUserId(): Long {
@@ -89,4 +104,7 @@ abstract class BaseFragment : Fragment() {
         dismissInfoSnackbar()
     }
 
+    open fun initFab() {
+
+    }
 }

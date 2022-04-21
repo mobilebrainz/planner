@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import app.khodko.planner.App
+import app.khodko.planner.R
 import app.khodko.planner.core.BaseFragment
 import app.khodko.planner.core.extension.getViewModelExt
 import app.khodko.planner.core.extension.navigateExt
@@ -32,14 +33,20 @@ class NotesFragment : BaseFragment() {
         return binding.root
     }
 
+    override fun initFab() {
+        fab.setImageResource(R.drawable.ic_add_24)
+        fab.show()
+        fab.setOnClickListener {
+            navigateExt(NotesFragmentDirections.actionNavNotesToNavAddNote())
+        }
+    }
+
     private fun initObservers() {
 
     }
 
     private fun initListeners() {
-        binding.btnAddNote.setOnClickListener {
-            navigateExt(NotesFragmentDirections.actionNavNotesToNavAddNote())
-        }
+
     }
 
     override fun onDestroyView() {
