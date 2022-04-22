@@ -35,9 +35,11 @@ class NewEventViewModel(
         viewModelScope.launch {
             if (id > 0) {
                 event.id = id
+                eventRepository.update(event)
+            } else {
+                id = eventRepository.insert(event)
+                event.id = id
             }
-            val newId = eventRepository.insert(event)
-            id = newId
             _event.value = event
             _savedEvent.value = true
         }

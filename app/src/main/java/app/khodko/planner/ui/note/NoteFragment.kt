@@ -38,6 +38,7 @@ class NoteFragment : BaseFragment() {
                 )
             }
             initObservers()
+            noteViewModel.load()
         }
         return binding.root
     }

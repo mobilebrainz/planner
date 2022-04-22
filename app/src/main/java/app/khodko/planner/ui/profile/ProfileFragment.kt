@@ -30,20 +30,14 @@ class ProfileFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         profileViewModel = getViewModelExt { ProfileViewModel(App.instance.userRepository, checkUserId()) }
-
         initObservers()
         initListeners()
-
         return binding.root
     }
 
     private fun initListeners() {
-        binding.btnSave.setOnClickListener {
-            validate()?.let {
-                it.icon = icon
-                profileViewModel.save(it)
-            }
-        }
+        binding.btnSave.setOnClickListener { save() }
+
         binding.btnLogout.setOnClickListener {
             requireActivity().getSharedPreferences(USER_ID_PREF, 0).edit { clear() }
             startActivity(Intent(requireContext(), LoginActivity::class.java))
@@ -86,7 +80,7 @@ class ProfileFragment : BaseFragment() {
         }
     }
 
-    private fun validate(): User? {
+    private fun save() {
         val name = binding.editTextName.text.toString().trim()
         val email = binding.editTextEmail.text.toString().trim()
         val password = binding.editTextPassword.text.toString().trim()
@@ -104,10 +98,11 @@ class ProfileFragment : BaseFragment() {
                 binding.editTextPassword.error = getString(R.string.password_field_error)
             }
             else -> {
-                return User(name = name, password = password, email = email)
+                val user = User(name = name, password = password, email = email)
+                user.icon = icon
+                profileViewModel.save(user)
             }
         }
-        return null
     }
 
     override fun onDestroyView() {

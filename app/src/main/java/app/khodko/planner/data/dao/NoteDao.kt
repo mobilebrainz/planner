@@ -7,8 +7,11 @@ import app.khodko.planner.data.entity.Note
 @Dao
 interface NoteDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(note: Note): Long
+
+    @Update
+    suspend fun update(note: Note)
 
     @Delete
     suspend fun delete(note: Note)

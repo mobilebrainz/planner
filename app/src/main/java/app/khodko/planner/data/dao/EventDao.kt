@@ -10,6 +10,9 @@ interface EventDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(event: Event): Long
 
+    @Update
+    suspend fun update(event: Event)
+
     @Delete
     suspend fun delete(event: Event)
 
