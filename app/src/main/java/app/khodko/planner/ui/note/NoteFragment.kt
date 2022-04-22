@@ -8,6 +8,7 @@ import app.khodko.planner.R
 import app.khodko.planner.core.BaseFragment
 import app.khodko.planner.core.extension.getViewModelExt
 import app.khodko.planner.core.extension.navigateExt
+import app.khodko.planner.core.stringToBitmap
 import app.khodko.planner.databinding.FragmentNoteBinding
 
 class NoteFragment : BaseFragment() {
@@ -48,6 +49,11 @@ class NoteFragment : BaseFragment() {
             binding.tittleView.text = n.tittle
             binding.textView.text = n.text
             binding.dateView.text = n.datetime
+            if (n.icon.isNotEmpty()) {
+                binding.noteImage.setImageBitmap(stringToBitmap(n.icon))
+            } else {
+                binding.noteImage.setImageResource(R.drawable.ic_image_outline_24)
+            }
         }
         noteViewModel.deletedNote.observe(viewLifecycleOwner) {
             findNavController().popBackStack()

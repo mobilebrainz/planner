@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.edit
+import androidx.core.view.isVisible
 import app.khodko.planner.App
 import app.khodko.planner.R
 import app.khodko.planner.core.BaseFragment
@@ -50,8 +51,14 @@ class ProfileFragment : BaseFragment() {
                     binding.profileImage.setImageURI(it)
                     val btm = decodeUri(requireContext(), it, 500)
                     icon = bitmapToString(btm!!)
+                    binding.deleteImage.isVisible = true
                 }
             }
+        }
+        binding.deleteImage.setOnClickListener {
+            icon = ""
+            binding.profileImage.setImageResource(R.drawable.ic_image_outline_24)
+            binding.deleteImage.isVisible = false
         }
     }
 
@@ -75,6 +82,10 @@ class ProfileFragment : BaseFragment() {
                 if (u.icon.isNotEmpty()) {
                     binding.profileImage.setImageBitmap(stringToBitmap(u.icon))
                     icon = u.icon
+                    binding.deleteImage.isVisible = true
+                } else {
+                    binding.profileImage.setImageResource(R.drawable.ic_image_outline_24)
+                    binding.deleteImage.isVisible = false
                 }
             }
         }

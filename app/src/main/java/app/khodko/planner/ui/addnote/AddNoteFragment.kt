@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import app.khodko.planner.App
 import app.khodko.planner.R
 import app.khodko.planner.core.BaseFragment
@@ -61,8 +62,14 @@ class AddNoteFragment : BaseFragment() {
                     binding.noteImage.setImageURI(it)
                     val btm = decodeUri(requireContext(), it, 500)
                     icon = bitmapToString(btm!!)
+                    binding.deleteImage.isVisible = true
                 }
             }
+        }
+        binding.deleteImage.setOnClickListener {
+            icon = ""
+            binding.noteImage.setImageResource(R.drawable.ic_image_outline_24)
+            binding.deleteImage.isVisible = false
         }
     }
 
@@ -76,6 +83,10 @@ class AddNoteFragment : BaseFragment() {
             if (n.icon.isNotEmpty()) {
                 binding.noteImage.setImageBitmap(stringToBitmap(n.icon))
                 icon = n.icon
+                binding.deleteImage.isVisible = true
+            } else {
+                binding.noteImage.setImageResource(R.drawable.ic_image_outline_24)
+                binding.deleteImage.isVisible = false
             }
         }
     }
