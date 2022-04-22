@@ -52,6 +52,11 @@
     <string name="menu_edit">Edit</string>
     <string name="menu_delete">Delete</string>
 
+    <string name="card_input_date">Input Date</string>
+    <string name="card_input_time">Input Time</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_cancel">Cancel</string>
+
     <string name="info_view"><![CDATA[
         <h4>Лабораторна работа №4 (Планировщик)</h4>
         <p>
