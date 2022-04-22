@@ -34,7 +34,7 @@ class CalendarFragment : BaseFragment() {
         fab.setImageResource(R.drawable.ic_add_24)
         fab.show()
         fab.setOnClickListener {
-            navigateExt(CalendarFragmentDirections.actionNavCalendarToNavEvent())
+            navigateExt(CalendarFragmentDirections.actionNavCalendarToNavNewEvent())
         }
     }
 

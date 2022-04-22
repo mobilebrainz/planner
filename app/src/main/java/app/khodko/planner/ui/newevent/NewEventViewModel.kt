@@ -1,0 +1,46 @@
+package app.khodko.planner.ui.newevent
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import app.khodko.planner.core.viewmodel.SingleLiveEvent
+import app.khodko.planner.data.entity.Event
+import app.khodko.planner.data.repository.EventRepository
+import kotlinx.coroutines.launch
+
+class NewEventViewModel(
+    private val eventRepository: EventRepository,
+    private var id: Long
+) : ViewModel() {
+
+    private val _event = MutableLiveData<Event>()
+    val event: LiveData<Event> = _event
+
+    private val _savedEvent = SingleLiveEvent<Boolean>()
+    val savedEvent: LiveData<Boolean> = _savedEvent
+
+    init {
+        if (id > 0) {
+            viewModelScope.launch {
+                val events = eventRepository.getEvent(id)
+                if (events.isNotEmpty()) {
+                    _event.value = events[0]
+                }
+            }
+        }
+    }
+
+    fun save(event: Event) {
+        viewModelScope.launch {
+            if (id > 0) {
+                event.id = id
+            }
+            val newId = eventRepository.insert(event)
+            id = newId
+            _event.value = event
+            _savedEvent.value = true
+        }
+    }
+
+}

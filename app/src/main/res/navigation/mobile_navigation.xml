@@ -13,13 +13,35 @@
         <action
             android:id="@+id/action_nav_calendar_to_nav_event"
             app:destination="@id/nav_event" />
+        <action
+            android:id="@+id/action_nav_calendar_to_nav_new_event"
+            app:destination="@id/nav_new_event" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_event"
         android:name="app.khodko.planner.ui.event.EventFragment"
         android:label="@string/menu_event"
-        tools:layout="@layout/fragment_event" />
+        tools:layout="@layout/fragment_event" >
+        <argument
+            android:name="id"
+            app:argType="long"
+            app:nullable="false" />
+        <action
+            android:id="@+id/action_nav_event_to_nav_new_event"
+            app:destination="@id/nav_new_event" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_new_event"
+        android:name="app.khodko.planner.ui.newevent.NewEventFragment"
+        android:label="@string/menu_new_event"
+        tools:layout="@layout/fragment_new_event" >
+        <argument
+            android:name="id"
+            android:defaultValue="-1L"
+            app:argType="long" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_notes"

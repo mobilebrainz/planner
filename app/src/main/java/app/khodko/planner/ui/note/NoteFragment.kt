@@ -55,7 +55,7 @@ class NoteFragment : BaseFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
-        inflater.inflate(R.menu.note_fragment_options_menu, menu)
+        inflater.inflate(R.menu.redact_options_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 

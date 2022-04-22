@@ -1,4 +1,4 @@
-package app.khodko.planner.ui.addnote
+package app.khodko.planner.ui.newevent
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,30 +9,29 @@ import app.khodko.planner.R
 import app.khodko.planner.core.BaseFragment
 import app.khodko.planner.core.extension.getViewModelExt
 import app.khodko.planner.data.entity.Note
-import app.khodko.planner.databinding.FragmentAddNoteBinding
+import app.khodko.planner.databinding.FragmentNewEventBinding
+import app.khodko.planner.ui.addnote.AddNoteFragmentArgs
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AddNoteFragment : BaseFragment() {
+class NewEventFragment : BaseFragment() {
 
-    private var _binding: FragmentAddNoteBinding? = null
+    private var _binding: FragmentNewEventBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var addNoteViewModel: AddNoteViewModel
+    private lateinit var newEventViewModel: NewEventViewModel
     private var userId: Long = -1
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentAddNoteBinding.inflate(inflater, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentNewEventBinding.inflate(inflater, container, false)
         arguments?.let {
             val args = AddNoteFragmentArgs.fromBundle(it)
             val id = args.id
             userId = checkUserId()
-            addNoteViewModel = getViewModelExt {
-                AddNoteViewModel(noteRepository = App.instance.noteRepository, id = id)
+            newEventViewModel = getViewModelExt {
+                NewEventViewModel(
+                    eventRepository = App.instance.eventRepository, id = id
+                )
             }
             initObservers()
         }
@@ -43,33 +42,20 @@ class AddNoteFragment : BaseFragment() {
         fab.setImageResource(R.drawable.ic_done_24)
         fab.show()
         fab.setOnClickListener {
-            addWord()
+            addEvent()
         }
     }
 
-    private fun initObservers() {
-        addNoteViewModel.savedNote.observe(viewLifecycleOwner) {
-            showInfoSnackbar(R.string.note_saved)
-        }
-        addNoteViewModel.note.observe(viewLifecycleOwner) { n ->
-            binding.editTittle.setText(n.tittle)
-            binding.editNote.setText(n.text)
-        }
-    }
-
-    private fun addWord() {
+    private fun addEvent() {
         val tittle = binding.editTittle.text.toString().trim()
-        val text = binding.editNote.text.toString().trim()
         when {
             tittle.isEmpty() -> {
                 binding.editTittle.requestFocus()
                 binding.editTittle.error = getString(R.string.tittle_field_error)
             }
-            text.isEmpty() -> {
-                binding.editNote.requestFocus()
-                binding.editNote.error = getString(R.string.note_field_error)
-            }
             else -> {
+                val allDays = binding.allDaySwitch.isChecked
+                /*
                 val sdf = SimpleDateFormat("dd.MM.yyyy hh:mm:ss", Locale.US)
                 val currentDate = sdf.format(Calendar.getInstance().time)
                 val note = Note(
@@ -78,8 +64,19 @@ class AddNoteFragment : BaseFragment() {
                     text = text,
                     datetime = currentDate
                 )
-                addNoteViewModel.save(note)
+                newEventViewModel.save(note)
+                 */
             }
+        }
+    }
+
+    private fun initObservers() {
+        newEventViewModel.savedEvent.observe(viewLifecycleOwner) {
+            showInfoSnackbar(R.string.event_saved)
+        }
+        newEventViewModel.event.observe(viewLifecycleOwner) { e ->
+            binding.editTittle.setText(e.tittle)
+            binding.allDaySwitch.isChecked = e.allDay
         }
     }
 
