@@ -36,20 +36,7 @@
                 android:maxLines="1"
                 android:paddingHorizontal="5dp"
                 android:singleLine="true" />
-
         </com.google.android.material.textfield.TextInputLayout>
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/allDaySwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:checked="true"
-            android:text="@string/switch_all_days"
-            android:textColor="@color/textColorLight"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:switchPadding="10dp" />
 
         <Button
             android:id="@+id/startBtn"
@@ -90,7 +77,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/card_input_date"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <DatePicker
                     android:id="@+id/datePicker"
@@ -107,17 +94,17 @@
                     <Button
                         android:id="@+id/datePickerCancel"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_weight="1"
                         android:text="@string/btn_cancel" />
 
                     <Button
                         android:id="@+id/datePickerOK"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_weight="1"
                         android:text="@string/btn_ok" />
 
                 </LinearLayout>
@@ -138,7 +125,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/card_input_time"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TimePicker
                     android:id="@+id/timePicker"
@@ -154,17 +141,17 @@
                     <Button
                         android:id="@+id/timePickerCancel"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_weight="1"
                         android:text="@string/btn_cancel" />
 
                     <Button
                         android:id="@+id/timePickerOK"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
+                        android:layout_weight="1"
                         android:text="@string/btn_ok" />
 
                 </LinearLayout>

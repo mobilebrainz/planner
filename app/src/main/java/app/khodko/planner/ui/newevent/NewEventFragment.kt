@@ -26,7 +26,11 @@ class NewEventFragment : BaseFragment() {
     private var startDate: Date = Calendar.getInstance().time
     private var endingDate: Date = Calendar.getInstance().time
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentNewEventBinding.inflate(inflater, container, false)
         arguments?.let {
             val args = AddNoteFragmentArgs.fromBundle(it)
@@ -143,8 +147,7 @@ class NewEventFragment : BaseFragment() {
                     tittle = tittle,
                     start = startDate.time,
                     ending = endingDate.time,
-                    repeat = 1,
-                    allDay = binding.allDaySwitch.isChecked
+                    repeat = 1
                 )
                 newEventViewModel.save(event)
             }
@@ -157,7 +160,6 @@ class NewEventFragment : BaseFragment() {
         }
         newEventViewModel.event.observe(viewLifecycleOwner) { e ->
             binding.editTittle.setText(e.tittle)
-            binding.allDaySwitch.isChecked = e.allDay
             startDate = Date(e.start)
             endingDate = Date(e.ending)
         }

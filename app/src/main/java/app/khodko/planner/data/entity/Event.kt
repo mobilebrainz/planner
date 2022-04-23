@@ -10,8 +10,7 @@ data class Event(
     @ColumnInfo(name = "tittle") var tittle: String,
     @ColumnInfo(name = "start") val start: Long,
     @ColumnInfo(name = "ending") val ending: Long,
-    @ColumnInfo(name = "repeat") val repeat: Int,
-    @ColumnInfo(name = "all_day") val allDay: Boolean
+    @ColumnInfo(name = "repeat") val repeat: Int
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

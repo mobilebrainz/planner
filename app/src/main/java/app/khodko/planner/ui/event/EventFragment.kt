@@ -15,7 +15,11 @@ class EventFragment : BaseFragment() {
 
     private lateinit var eventViewModel: EventViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentEventBinding.inflate(inflater, container, false)
         eventViewModel = getViewModelExt { EventViewModel() }
 
