@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import app.khodko.planner.App
 import app.khodko.planner.R
 import app.khodko.planner.core.BaseFragment
+import app.khodko.planner.core.date.DateFormat
 import app.khodko.planner.core.extension.getViewModelExt
 import app.khodko.planner.data.entity.Event
 import app.khodko.planner.databinding.FragmentNewEventBinding
@@ -22,9 +23,7 @@ class NewEventFragment : BaseFragment() {
     private lateinit var newEventViewModel: NewEventViewModel
     private var userId: Long = -1
     private var start = false
-    private var ending = false
     private var startDate: Date = Calendar.getInstance().time
-    private var endingDate: Date = Calendar.getInstance().time
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,7 +51,7 @@ class NewEventFragment : BaseFragment() {
         fab.setImageResource(R.drawable.ic_done_24)
         fab.show()
         fab.setOnClickListener {
-            addEvent()
+            saveEvent()
         }
     }
 
@@ -61,25 +60,9 @@ class NewEventFragment : BaseFragment() {
             binding.datePickerView.isVisible = true
             fab.hide()
             start = true
-            ending = false
 
             val calendar = Calendar.getInstance()
             calendar.time = startDate
-            binding.datePicker.updateDate(
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            )
-        }
-
-        binding.endingBtn.setOnClickListener {
-            binding.datePickerView.isVisible = true
-            fab.hide()
-            ending = true
-            start = false
-
-            val calendar = Calendar.getInstance()
-            calendar.time = endingDate
             binding.datePicker.updateDate(
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
@@ -91,7 +74,6 @@ class NewEventFragment : BaseFragment() {
             binding.datePickerView.isVisible = false
             fab.show()
             start = false
-            ending = false
         }
         binding.datePickerOK.setOnClickListener {
             binding.datePickerView.isVisible = false
@@ -102,17 +84,11 @@ class NewEventFragment : BaseFragment() {
                 binding.timePicker.hour = calendar.get(Calendar.HOUR_OF_DAY)
                 binding.timePicker.minute = calendar.get(Calendar.MINUTE)
             }
-            if (ending) {
-                calendar.time = endingDate
-                binding.timePicker.hour = calendar.get(Calendar.HOUR_OF_DAY)
-                binding.timePicker.minute = calendar.get(Calendar.MINUTE)
-            }
         }
         binding.timePickerCancel.setOnClickListener {
             binding.timePickerView.isVisible = false
             fab.show()
             start = false
-            ending = false
         }
         binding.timePickerOK.setOnClickListener {
             binding.timePickerView.isVisible = false
@@ -128,13 +104,11 @@ class NewEventFragment : BaseFragment() {
             )
             val date = cal.time
             if (start) startDate = date
-            if (ending) endingDate = date
             start = false
-            ending = false
         }
     }
 
-    private fun addEvent() {
+    private fun saveEvent() {
         val tittle = binding.editTittle.text.toString().trim()
         when {
             tittle.isEmpty() -> {
@@ -142,11 +116,15 @@ class NewEventFragment : BaseFragment() {
                 binding.editTittle.error = getString(R.string.tittle_field_error)
             }
             else -> {
+
                 val event = Event(
                     userId = userId,
                     tittle = tittle,
+                    time = DateFormat.timeFormat.format(startDate),
+                    date = DateFormat.dateFormat.format(startDate),
+                    month = DateFormat.monthFormat.format(startDate),
+                    year = DateFormat.yearFormat.format(startDate),
                     start = startDate.time,
-                    ending = endingDate.time,
                     repeat = 1
                 )
                 newEventViewModel.save(event)
@@ -161,7 +139,6 @@ class NewEventFragment : BaseFragment() {
         newEventViewModel.event.observe(viewLifecycleOwner) { e ->
             binding.editTittle.setText(e.tittle)
             startDate = Date(e.start)
-            endingDate = Date(e.ending)
         }
     }
 

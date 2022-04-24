@@ -44,12 +44,6 @@
             android:layout_height="wrap_content"
             android:text="Start" />
 
-        <Button
-            android:id="@+id/endingBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ending" />
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"

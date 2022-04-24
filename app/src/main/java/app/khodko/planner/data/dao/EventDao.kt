@@ -19,6 +19,12 @@ interface EventDao {
     @Query("SELECT * FROM event WHERE user_id = :userId")
     suspend fun getEvents(userId: Long): List<Event>
 
+    @Query("SELECT * FROM event WHERE user_id = :userId AND date = :date")
+    suspend fun getEventsByDate(userId: Long, date: String): List<Event>
+
+    @Query("SELECT * FROM event WHERE user_id = :userId AND month = :month AND year = :year")
+    suspend fun getEventsByMonthAndYear(userId: Long, month: String, year: String): List<Event>
+
     @Query("SELECT * FROM event WHERE id = :id")
     suspend fun getEvent(id: Long): List<Event>
 
