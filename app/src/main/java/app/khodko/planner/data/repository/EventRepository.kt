@@ -1,7 +1,6 @@
 package app.khodko.planner.data.repository
 
 import androidx.annotation.WorkerThread
-import androidx.room.Query
 import app.khodko.planner.data.dao.EventDao
 import app.khodko.planner.data.entity.Event
 

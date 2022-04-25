@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/custom_calendar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,31 +10,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
 
         <ImageButton
             android:id="@+id/previousBtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_margin="10dp"
-            android:background="@drawable/ic_arrow_left_24" />
+            android:background="@drawable/ic_arrow_left_24"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/current_Date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_gravity="center"
             android:layout_weight="3"
             android:gravity="center"
-            android:text="Current Date"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/nextBtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_margin="10dp"
             android:background="@drawable/ic_arrow_right_24" />
 

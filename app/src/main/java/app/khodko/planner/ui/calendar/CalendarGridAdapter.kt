@@ -1,4 +1,4 @@
-package app.khodko.planner.ui.layout
+package app.khodko.planner.ui.calendar
 
 import android.content.Context
 import android.graphics.Color

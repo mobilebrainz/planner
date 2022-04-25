@@ -5,7 +5,6 @@
     style="@style/NestedScrollBarStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="6dp"
     tools:context=".ui.calendar.CalendarFragment">
 
     <LinearLayout
@@ -13,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <app.khodko.planner.ui.layout.CustomCalendarView
+        <app.khodko.planner.ui.calendar.CustomCalendarView
             android:id="@+id/custom_calendar_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -22,7 +21,7 @@
             android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:backgroundTint="@color/appBackground"
             app:cardCornerRadius="5dp"
             app:cardElevation="1dp">
@@ -36,11 +35,11 @@
                     android:id="@+id/dateView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <FrameLayout
                     android:layout_width="match_parent"
