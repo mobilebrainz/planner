@@ -23,6 +23,10 @@ class CalendarGridAdapter(
     R.layout.calendar_cell_layout
 ) {
 
+    private var currDate: String = DateFormat.dateFormat.format(
+        Calendar.getInstance(Locale.ENGLISH).time
+    )
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
         val monthDate: Date? = dates[position]
@@ -39,7 +43,9 @@ class CalendarGridAdapter(
             view = LayoutInflater.from(context)
                 .inflate(R.layout.calendar_cell_layout, parent, false)
 
-            if (displayMonth == currentMonth && displayYear == currentYear) {
+            if (currDate == DateFormat.dateFormat.format(monthDate)) {
+                view.setBackgroundColor(Color.parseColor("#9FA8DA"))
+            } else if (displayMonth == currentMonth && displayYear == currentYear) {
                 view.setBackgroundColor(Color.parseColor("#9CCC65"))
             } else {
                 view.setBackgroundColor(Color.parseColor("#cccccc"))
