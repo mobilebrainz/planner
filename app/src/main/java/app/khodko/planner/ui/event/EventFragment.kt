@@ -2,11 +2,15 @@ package app.khodko.planner.ui.event
 
 import android.os.Bundle
 import android.view.*
+import androidx.navigation.fragment.findNavController
 import app.khodko.planner.App
 import app.khodko.planner.R
 import app.khodko.planner.core.BaseFragment
+import app.khodko.planner.core.date.DateFormat
 import app.khodko.planner.core.extension.getViewModelExt
+import app.khodko.planner.core.extension.navigateExt
 import app.khodko.planner.databinding.FragmentEventBinding
+import java.util.*
 
 class EventFragment : BaseFragment() {
 
@@ -36,13 +40,20 @@ class EventFragment : BaseFragment() {
                 )
             }
             initObservers()
-            //noteViewModel.load()
+            eventViewModel.load()
         }
         return binding.root
     }
 
     private fun initObservers() {
-
+        eventViewModel.event.observe(viewLifecycleOwner) { e ->
+            binding.tittleView.text = e.tittle
+            binding.dateView.text = DateFormat.dateTimeFormat.format(Date(e.start))
+            binding.descriptionView.text = e.description
+        }
+        eventViewModel.deletedEvent.observe(viewLifecycleOwner) {
+            findNavController().popBackStack()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -54,11 +65,11 @@ class EventFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem) =
         when (item.itemId) {
             R.id.edit -> {
-                //navigateExt(NoteFragmentDirections.actionNavEventToNavNewEvent(eventViewModel.id))
+                navigateExt(EventFragmentDirections.actionNavEventToNavNewEvent(eventViewModel.id))
                 true
             }
             R.id.delete -> {
-                //eventViewModel.delete()
+                eventViewModel.delete()
                 true
             }
             else -> false

@@ -12,6 +12,7 @@ object DateFormat {
     val yearFormat: SimpleDateFormat = SimpleDateFormat("yyyy", Locale.ENGLISH)
     val timeFormat: SimpleDateFormat = SimpleDateFormat("K:mm a", Locale.ENGLISH)
     val prettyDateFormat: SimpleDateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH)
+    val dateTimeFormat: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.ENGLISH)
 
     fun toDate(dateInString: String): Date? {
         var date: Date? = null

@@ -10,6 +10,7 @@ import app.khodko.planner.R
 import app.khodko.planner.core.BaseFragment
 import app.khodko.planner.core.date.DateFormat
 import app.khodko.planner.core.extension.getViewModelExt
+import app.khodko.planner.core.extension.hideSoftKeyboardExt
 import app.khodko.planner.data.entity.Event
 import app.khodko.planner.databinding.FragmentNewEventBinding
 import app.khodko.planner.ui.addnote.AddNoteFragmentArgs
@@ -57,6 +58,7 @@ class NewEventFragment : BaseFragment() {
 
     private fun initListeners() {
         binding.startBtn.setOnClickListener {
+            hideSoftKeyboardExt()
             binding.datePickerView.isVisible = true
             fab.hide()
             start = true
@@ -103,13 +105,17 @@ class NewEventFragment : BaseFragment() {
                 binding.timePicker.minute
             )
             val date = cal.time
-            if (start) startDate = date
+            if (start) {
+                startDate = date
+                binding.startBtn.text = DateFormat.dateTimeFormat.format(startDate)
+            }
             start = false
         }
     }
 
     private fun saveEvent() {
         val tittle = binding.editTittle.text.toString().trim()
+        val description = binding.editDescription.text.toString().trim()
         when {
             tittle.isEmpty() -> {
                 binding.editTittle.requestFocus()
@@ -125,7 +131,8 @@ class NewEventFragment : BaseFragment() {
                     month = DateFormat.monthFormat.format(startDate),
                     year = DateFormat.yearFormat.format(startDate),
                     start = startDate.time,
-                    repeat = 1
+                    repeat = 1,
+                    description = description
                 )
                 newEventViewModel.save(event)
             }
@@ -138,7 +145,9 @@ class NewEventFragment : BaseFragment() {
         }
         newEventViewModel.event.observe(viewLifecycleOwner) { e ->
             binding.editTittle.setText(e.tittle)
+            binding.editDescription.setText(e.description)
             startDate = Date(e.start)
+            binding.startBtn.text = DateFormat.dateTimeFormat.format(startDate)
         }
     }
 
