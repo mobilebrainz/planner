@@ -15,7 +15,10 @@ object DateFormat {
     val dateTimeFormat: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.ENGLISH)
 
     fun rangeDate(start: Date, ending: Date) =
-        dateTimeFormat.format(start) + " - " + DateFormat.timeFormat.format(ending)
+        dateTimeFormat.format(start) + " - " + timeFormat.format(ending)
+
+    fun rangeTime(start: Date, ending: Date) =
+        timeFormat.format(start) + " - " + timeFormat.format(ending)
 
     fun toDate(dateInString: String): Date? {
         var date: Date? = null

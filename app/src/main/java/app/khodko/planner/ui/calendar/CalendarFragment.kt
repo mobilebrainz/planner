@@ -34,15 +34,16 @@ class CalendarFragment : BaseFragment() {
                 userId = checkUserId()
             )
         }
-
         initListeners()
         initObservers()
+        load()
+        binding.dateView.text = DateFormat.prettyDateFormat.format(calendarViewModel.clickDate)
+        return binding.root
+    }
 
+    private fun load() {
         calendarViewModel.loadEventsByMonth(calendarViewModel.clickDate)
         calendarViewModel.loadEventsByDate(calendarViewModel.clickDate)
-        binding.dateView.text = DateFormat.prettyDateFormat.format(calendarViewModel.clickDate)
-
-        return binding.root
     }
 
     override fun initFab() {
@@ -80,6 +81,7 @@ class CalendarFragment : BaseFragment() {
             }
             initRecycler(events)
         }
+        calendarViewModel.deletedEvent.observe(viewLifecycleOwner) { load() }
     }
 
     private fun initRecycler(events: List<Event>) {
@@ -93,8 +95,14 @@ class CalendarFragment : BaseFragment() {
         adapter.submitList(events)
 
         addDividers()
-        adapter.shotClickListener = { item, _ ->
-            navigateExt(CalendarFragmentDirections.actionNavCalendarToNavEvent(item.id))
+        adapter.shotClickListener = { event, _ ->
+            navigateExt(CalendarFragmentDirections.actionNavCalendarToNavEvent(event.id))
+        }
+        adapter.editClickListener = { event ->
+            navigateExt(CalendarFragmentDirections.actionNavCalendarToNavNewEvent(event.id))
+        }
+        adapter.deleteClickListener = {
+            calendarViewModel.delete(it)
         }
     }
 

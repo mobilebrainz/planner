@@ -10,6 +10,8 @@ import app.khodko.planner.data.entity.Event
 class EventsAdapter : ListAdapter<Event, EventViewHolder>(REPO_COMPARATOR) {
 
     var shotClickListener: ((Event, v: View) -> Unit)? = null
+    var deleteClickListener: ((Event) -> Unit)? = null
+    var editClickListener: ((Event) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         return EventViewHolder.create(parent)
@@ -17,11 +19,17 @@ class EventsAdapter : ListAdapter<Event, EventViewHolder>(REPO_COMPARATOR) {
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         val item = getItem(position)
-        item?.let {
+        item?.let { event ->
             shotClickListener?.apply {
-                holder.itemView.setOnClickListener { invoke(item, it) }
+                holder.itemView.setOnClickListener { invoke(event, it) }
             }
-            holder.bind(item)
+            deleteClickListener?.apply {
+                holder.deleteImage.setOnClickListener { invoke(event) }
+            }
+            editClickListener?.apply {
+                holder.editImage.setOnClickListener { invoke(event) }
+            }
+            holder.bind(event)
         }
     }
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.khodko.planner.core.date.DateFormat
+import app.khodko.planner.core.viewmodel.SingleLiveEvent
 import app.khodko.planner.data.entity.Event
 import app.khodko.planner.data.repository.EventRepository
 import kotlinx.coroutines.launch
@@ -24,6 +25,9 @@ class CalendarViewModel(
     private val _dayEvents = MutableLiveData<List<Event>>()
     val dayEvents: LiveData<List<Event>> = _dayEvents
 
+    private val _deletedEvent = SingleLiveEvent<Boolean>()
+    val deletedEvent: LiveData<Boolean> = _deletedEvent
+
     fun loadEventsByMonth(date: Date) {
         viewModelScope.launch {
             _monthEvents.value = eventRepository.getEventsByMonthAndYear(
@@ -40,6 +44,13 @@ class CalendarViewModel(
                 userId = userId,
                 date = DateFormat.dateFormat.format(date)
             )
+        }
+    }
+
+    fun delete(event: Event) {
+        viewModelScope.launch {
+            eventRepository.delete(event)
+            _deletedEvent.value = true
         }
     }
 
