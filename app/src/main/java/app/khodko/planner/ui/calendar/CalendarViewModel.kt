@@ -43,10 +43,4 @@ class CalendarViewModel(
         }
     }
 
-    fun delete(note: Event) {
-        viewModelScope.launch {
-            eventRepository.delete(note)
-            //_notes.value = eventRepository.getNotes(userId)
-        }
-    }
 }
