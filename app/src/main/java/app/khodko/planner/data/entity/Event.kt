@@ -13,6 +13,7 @@ data class Event(
     @ColumnInfo(name = "month") var month: String,
     @ColumnInfo(name = "year") var year: String,
     @ColumnInfo(name = "start") val start: Long,
+    @ColumnInfo(name = "ending") val ending: Long,
     @ColumnInfo(name = "repeat") val repeat: Int = 1,
     @ColumnInfo(name = "description") val description: String
 ) {

@@ -55,8 +55,9 @@
     <string name="menu_edit">Edit</string>
     <string name="menu_delete">Delete</string>
 
-    <string name="card_input_date">Input Date</string>
-    <string name="card_input_time">Input Time</string>
+    <string name="input_date">Input Date</string>
+    <string name="input_start_time">Input Start Time</string>
+    <string name="input_end_time">Input End Time</string>
     <string name="btn_ok">OK</string>
     <string name="btn_cancel">Cancel</string>
 

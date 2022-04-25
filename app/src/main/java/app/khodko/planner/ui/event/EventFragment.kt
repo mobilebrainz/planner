@@ -48,7 +48,7 @@ class EventFragment : BaseFragment() {
     private fun initObservers() {
         eventViewModel.event.observe(viewLifecycleOwner) { e ->
             binding.tittleView.text = e.tittle
-            binding.dateView.text = DateFormat.dateTimeFormat.format(Date(e.start))
+            binding.dateView.text = DateFormat.rangeDate(Date(e.start), Date(e.ending))
             binding.descriptionView.text = e.description
         }
         eventViewModel.deletedEvent.observe(viewLifecycleOwner) {

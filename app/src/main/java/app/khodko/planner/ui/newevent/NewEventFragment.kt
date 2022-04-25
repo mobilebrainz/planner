@@ -25,6 +25,7 @@ class NewEventFragment : BaseFragment() {
     private var userId: Long = -1
     private var start = false
     private var startDate: Date = Calendar.getInstance().time
+    private var endDate: Date = Calendar.getInstance().time
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -80,12 +81,12 @@ class NewEventFragment : BaseFragment() {
         binding.datePickerOK.setOnClickListener {
             binding.datePickerView.isVisible = false
             binding.timePickerView.isVisible = true
+            binding.timeTextView.text = getString(R.string.input_start_time)
+            start = true
             val calendar = Calendar.getInstance()
-            if (start) {
-                calendar.time = startDate
-                binding.timePicker.hour = calendar.get(Calendar.HOUR_OF_DAY)
-                binding.timePicker.minute = calendar.get(Calendar.MINUTE)
-            }
+            calendar.time = startDate
+            binding.timePicker.hour = calendar.get(Calendar.HOUR_OF_DAY)
+            binding.timePicker.minute = calendar.get(Calendar.MINUTE)
         }
         binding.timePickerCancel.setOnClickListener {
             binding.timePickerView.isVisible = false
@@ -93,23 +94,38 @@ class NewEventFragment : BaseFragment() {
             start = false
         }
         binding.timePickerOK.setOnClickListener {
-            binding.timePickerView.isVisible = false
-            fab.show()
-
-            val cal = Calendar.getInstance()
-            cal.set(
-                binding.datePicker.year,
-                binding.datePicker.month,
-                binding.datePicker.dayOfMonth,
-                binding.timePicker.hour,
-                binding.timePicker.minute
-            )
-            val date = cal.time
             if (start) {
-                startDate = date
-                binding.startBtn.text = DateFormat.dateTimeFormat.format(startDate)
+                start = false
+                binding.timeTextView.text = getString(R.string.input_end_time)
+                val cal = Calendar.getInstance()
+                cal.set(
+                    binding.datePicker.year,
+                    binding.datePicker.month,
+                    binding.datePicker.dayOfMonth,
+                    binding.timePicker.hour,
+                    binding.timePicker.minute
+                )
+                startDate = cal.time
+
+                val calendar = Calendar.getInstance()
+                calendar.time = endDate
+                binding.timePicker.hour = calendar.get(Calendar.HOUR_OF_DAY)
+                binding.timePicker.minute = calendar.get(Calendar.MINUTE)
+            } else {
+                binding.timePickerView.isVisible = false
+                fab.show()
+
+                val cal = Calendar.getInstance()
+                cal.set(
+                    binding.datePicker.year,
+                    binding.datePicker.month,
+                    binding.datePicker.dayOfMonth,
+                    binding.timePicker.hour,
+                    binding.timePicker.minute
+                )
+                endDate = cal.time
+                binding.startBtn.text = DateFormat.rangeDate(startDate, endDate)
             }
-            start = false
         }
     }
 
@@ -131,6 +147,7 @@ class NewEventFragment : BaseFragment() {
                     month = DateFormat.monthFormat.format(startDate),
                     year = DateFormat.yearFormat.format(startDate),
                     start = startDate.time,
+                    ending = endDate.time,
                     repeat = 1,
                     description = description
                 )
@@ -147,7 +164,8 @@ class NewEventFragment : BaseFragment() {
             binding.editTittle.setText(e.tittle)
             binding.editDescription.setText(e.description)
             startDate = Date(e.start)
-            binding.startBtn.text = DateFormat.dateTimeFormat.format(startDate)
+            endDate = Date(e.ending)
+            binding.startBtn.text = DateFormat.rangeDate(startDate, endDate)
         }
     }
 
