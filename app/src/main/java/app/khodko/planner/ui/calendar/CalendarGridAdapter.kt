@@ -43,13 +43,19 @@ class CalendarGridAdapter(
             view = LayoutInflater.from(context)
                 .inflate(R.layout.calendar_cell_layout, parent, false)
 
-            if (currDate == DateFormat.dateFormat.format(monthDate)) {
-                view.setBackgroundColor(Color.parseColor("#9FA8DA"))
-            } else if (displayMonth == currentMonth && displayYear == currentYear) {
-                view.setBackgroundColor(Color.parseColor("#9CCC65"))
-            } else {
-                view.setBackgroundColor(Color.parseColor("#cccccc"))
+            val color = when {
+                currDate == DateFormat.dateFormat.format(monthDate) -> {
+                    R.color.calendarCurrentDayColor
+                }
+                displayMonth == currentMonth && displayYear == currentYear -> {
+                    R.color.calendarMonthDayColor
+                }
+                else -> {
+                    R.color.calendarAnotherDayColor
+                }
             }
+            view.setBackgroundColor(view.context.getColor(color))
+
             val cellNumber: TextView = view.findViewById(R.id.calendar_day)
             cellNumber.text = dayNo.toString()
 
