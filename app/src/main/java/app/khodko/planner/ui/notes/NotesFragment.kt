@@ -1,19 +1,17 @@
 package app.khodko.planner.ui.notes
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import app.khodko.planner.App
 import app.khodko.planner.R
 import app.khodko.planner.core.BaseFragment
 import app.khodko.planner.core.extension.getViewModelExt
 import app.khodko.planner.core.extension.navigateExt
+import app.khodko.planner.data.entity.Note
 import app.khodko.planner.databinding.FragmentNotesBinding
 
 class NotesFragment : BaseFragment() {
@@ -48,12 +46,11 @@ class NotesFragment : BaseFragment() {
         val recyclerView = binding.list
 
         //recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        //recyclerView.layoutManager = StaggeredGridLayoutManager(2, )
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+        //recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val adapter = NotesAdapter()
         recyclerView.adapter = adapter
-        addDividers()
 
         adapter.shotClickListener = { item, _ ->
             navigateExt(NotesFragmentDirections.actionNavNotesToNavNote(item.id))
@@ -61,7 +58,7 @@ class NotesFragment : BaseFragment() {
 
         notesViewModel.notes.observe(viewLifecycleOwner) {
             it.let {
-                adapter.submitList(it)
+                adapter.setData(it as ArrayList<Note>)
                 if (it.isEmpty()) {
                     binding.list.visibility = View.GONE
                     binding.emptyList.visibility = View.VISIBLE
@@ -72,29 +69,6 @@ class NotesFragment : BaseFragment() {
             }
         }
 
-        val itemTouchHelperCallback = object :
-            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val item = adapter.currentList[viewHolder.adapterPosition]
-                notesViewModel.delete(item)
-            }
-        }
-        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
-        itemTouchHelper.attachToRecyclerView(recyclerView)
-    }
-
-    private fun addDividers() {
-        val decoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-        binding.list.addItemDecoration(decoration)
     }
 
     override fun onDestroyView() {
