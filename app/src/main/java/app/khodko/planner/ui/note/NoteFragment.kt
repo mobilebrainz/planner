@@ -8,6 +8,7 @@ import app.khodko.planner.R
 import app.khodko.planner.core.BaseFragment
 import app.khodko.planner.core.extension.getViewModelExt
 import app.khodko.planner.core.extension.navigateExt
+import app.khodko.planner.core.extension.showAlertDialogExt
 import app.khodko.planner.core.stringToBitmap
 import app.khodko.planner.databinding.FragmentNoteBinding
 
@@ -73,7 +74,9 @@ class NoteFragment : BaseFragment() {
                 true
             }
             R.id.delete -> {
-                noteViewModel.delete()
+                showAlertDialogExt(R.string.dialog_delete) {
+                    noteViewModel.delete()
+                }
                 true
             }
             else -> false

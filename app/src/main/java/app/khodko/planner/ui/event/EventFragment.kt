@@ -9,6 +9,7 @@ import app.khodko.planner.core.BaseFragment
 import app.khodko.planner.core.date.DateFormat
 import app.khodko.planner.core.extension.getViewModelExt
 import app.khodko.planner.core.extension.navigateExt
+import app.khodko.planner.core.extension.showAlertDialogExt
 import app.khodko.planner.databinding.FragmentEventBinding
 import java.util.*
 
@@ -69,7 +70,9 @@ class EventFragment : BaseFragment() {
                 true
             }
             R.id.delete -> {
-                eventViewModel.delete()
+                showAlertDialogExt(R.string.dialog_delete) {
+                    eventViewModel.delete()
+                }
                 true
             }
             else -> false

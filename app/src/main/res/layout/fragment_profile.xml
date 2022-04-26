@@ -144,13 +144,6 @@
             android:layout_marginVertical="4dp"
             android:text="@string/save_btn" />
 
-        <Button
-            android:id="@+id/btnLogout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="4dp"
-            android:text="@string/logout_btn" />
-
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

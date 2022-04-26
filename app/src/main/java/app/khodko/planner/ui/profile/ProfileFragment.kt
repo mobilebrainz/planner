@@ -2,9 +2,7 @@ package app.khodko.planner.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.content.edit
 import androidx.core.view.isVisible
 import app.khodko.planner.App
@@ -13,12 +11,15 @@ import app.khodko.planner.core.BaseFragment
 import app.khodko.planner.core.bitmapToString
 import app.khodko.planner.core.decodeUri
 import app.khodko.planner.core.extension.getViewModelExt
+import app.khodko.planner.core.extension.navigateExt
+import app.khodko.planner.core.extension.showAlertDialogExt
 import app.khodko.planner.core.stringToBitmap
 import app.khodko.planner.data.entity.User
 import app.khodko.planner.databinding.FragmentProfileBinding
 import app.khodko.planner.ui.activity.ImageChooserInterface
 import app.khodko.planner.ui.activity.LoginActivity
 import app.khodko.planner.ui.activity.USER_ID_PREF
+import app.khodko.planner.ui.note.NoteFragmentDirections
 
 class ProfileFragment : BaseFragment() {
 
@@ -27,6 +28,11 @@ class ProfileFragment : BaseFragment() {
 
     private var icon = ""
     private lateinit var profileViewModel: ProfileViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
@@ -39,11 +45,6 @@ class ProfileFragment : BaseFragment() {
     private fun initListeners() {
         binding.btnSave.setOnClickListener { save() }
 
-        binding.btnLogout.setOnClickListener {
-            requireActivity().getSharedPreferences(USER_ID_PREF, 0).edit { clear() }
-            startActivity(Intent(requireContext(), LoginActivity::class.java))
-            requireActivity().finish()
-        }
         binding.profileImage.setOnClickListener {
             val imageChooser = activity as ImageChooserInterface
             imageChooser.showImageChooser {
@@ -115,6 +116,25 @@ class ProfileFragment : BaseFragment() {
             }
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.profile_options_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) =
+        when (item.itemId) {
+            R.id.logout -> {
+                showAlertDialogExt(R.string.dialog_logout) {
+                    requireActivity().getSharedPreferences(USER_ID_PREF, 0).edit { clear() }
+                    startActivity(Intent(requireContext(), LoginActivity::class.java))
+                    requireActivity().finish()
+                }
+                true
+            }
+            else -> false
+        }
 
     override fun onDestroyView() {
         super.onDestroyView()

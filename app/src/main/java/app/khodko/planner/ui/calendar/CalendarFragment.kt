@@ -12,6 +12,7 @@ import app.khodko.planner.core.BaseFragment
 import app.khodko.planner.core.date.DateFormat
 import app.khodko.planner.core.extension.getViewModelExt
 import app.khodko.planner.core.extension.navigateExt
+import app.khodko.planner.core.extension.showAlertDialogExt
 import app.khodko.planner.data.entity.Event
 import app.khodko.planner.databinding.FragmentCalendarBinding
 
@@ -101,8 +102,10 @@ class CalendarFragment : BaseFragment() {
         adapter.editClickListener = { event ->
             navigateExt(CalendarFragmentDirections.actionNavCalendarToNavNewEvent(event.id))
         }
-        adapter.deleteClickListener = {
-            calendarViewModel.delete(it)
+        adapter.deleteClickListener = { event ->
+            showAlertDialogExt(R.string.dialog_delete) {
+                calendarViewModel.delete(event)
+            }
         }
     }
 
