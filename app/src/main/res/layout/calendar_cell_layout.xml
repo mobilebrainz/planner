@@ -21,7 +21,7 @@
         android:layout_gravity="center"
         android:textSize="10sp"
         android:textStyle="bold"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/textColorDark"
         tools:ignore="SmallSp" />
 
 </LinearLayout>
