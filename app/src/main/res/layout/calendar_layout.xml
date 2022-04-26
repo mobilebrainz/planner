@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/custom_calendar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/appBackground"
     android:orientation="vertical">
 
     <LinearLayout
@@ -19,6 +21,7 @@
             android:layout_height="24dp"
             android:layout_margin="10dp"
             android:background="@drawable/ic_arrow_left_24"
+            android:backgroundTint="@color/colorAccent"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -28,7 +31,8 @@
             android:layout_gravity="center"
             android:layout_weight="3"
             android:gravity="center"
-            android:textSize="16sp"
+            android:textSize="18sp"
+            android:textColor="@color/textColorDark"
             android:textStyle="bold" />
 
         <ImageButton
@@ -36,6 +40,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_margin="10dp"
+            android:backgroundTint="@color/colorAccent"
             android:background="@drawable/ic_arrow_right_24" />
 
     </LinearLayout>
@@ -43,7 +48,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/md_blue_grey_50"
+        android:background="@color/md_blue_grey_100"
         android:orientation="horizontal"
         android:paddingTop="4dp"
         android:paddingBottom="4dp">
@@ -54,6 +59,7 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/textColorDark"
             android:text="Sun"
             android:textStyle="bold" />
 
@@ -63,6 +69,7 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/textColorDark"
             android:text="Mon"
             android:textStyle="bold" />
 
@@ -72,6 +79,7 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/textColorDark"
             android:text="Tue"
             android:textStyle="bold" />
 
@@ -81,6 +89,7 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/textColorDark"
             android:text="Wed"
             android:textStyle="bold" />
 
@@ -90,6 +99,7 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/textColorDark"
             android:text="Thu"
             android:textStyle="bold" />
 
@@ -99,6 +109,7 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/textColorDark"
             android:text="Fri"
             android:textStyle="bold" />
 
@@ -108,6 +119,7 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/textColorDark"
             android:text="Sat"
             android:textStyle="bold" />
 

@@ -1,7 +1,6 @@
 package app.khodko.planner.ui.calendar
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,7 +42,11 @@ class CalendarGridAdapter(
             view = LayoutInflater.from(context)
                 .inflate(R.layout.calendar_cell_layout, parent, false)
 
-            val color = when {
+            val cellNumber: TextView = view.findViewById(R.id.calendar_day)
+            cellNumber.text = dayNo.toString()
+
+            var textColor = R.color.calendarMonthDayTextColor
+            val backguoundColor = when {
                 currDate == DateFormat.dateFormat.format(monthDate) -> {
                     R.color.calendarCurrentDayColor
                 }
@@ -51,13 +54,12 @@ class CalendarGridAdapter(
                     R.color.calendarMonthDayColor
                 }
                 else -> {
+                    textColor = R.color.calendarAnotherDayTextColor
                     R.color.calendarAnotherDayColor
                 }
             }
-            view.setBackgroundColor(view.context.getColor(color))
-
-            val cellNumber: TextView = view.findViewById(R.id.calendar_day)
-            cellNumber.text = dayNo.toString()
+            view.setBackgroundColor(view.context.getColor(backguoundColor))
+            cellNumber.setTextColor(view.context.getColor(textColor))
 
             val eventText: TextView = view.findViewById(R.id.event_id)
             val eventCalendar: Calendar = Calendar.getInstance()

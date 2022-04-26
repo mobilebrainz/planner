@@ -33,9 +33,8 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="end"
-                android:src="@drawable/ic_delete_24"
+                android:src="@drawable/ic_close_24"
                 tools:ignore="ContentDescription"
-                app:tint="@color/md_black_1000"
                 android:visibility="gone"/>
         </FrameLayout>
 
