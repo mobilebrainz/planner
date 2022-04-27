@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import androidx.core.view.isVisible
 import app.khodko.planner.R
 import app.khodko.planner.core.date.DateFormat
 import app.khodko.planner.data.entity.Event
@@ -63,29 +62,20 @@ class CalendarGridAdapter(
             cellNumber.setTextColor(view.context.getColor(textColor))
 
             val eventText: TextView = view.findViewById(R.id.event_id)
-            showEvents(eventText, day, month, year)
+            showEvents(eventText, monthDate)
         } else {
             view = convertView
         }
         return view
     }
 
-    private fun showEvents(eventText: TextView, day: Int, month: Int, year: Int ) {
-        val calendar: Calendar = Calendar.getInstance()
+    private fun showEvents(eventText: TextView, calendarDate: Date) {
         val dayEvents = mutableListOf<Event>()
         for (event in events) {
-            DateFormat.toDate(event.date)?.let { date ->
-                calendar.time = date
-                if (day == calendar.get(Calendar.DAY_OF_MONTH)
-                    && month == calendar.get(Calendar.MONTH) + 1
-                    && year == calendar.get(Calendar.YEAR)
-                ) {
-                    dayEvents.add(event)
-                    eventText.text = dayEvents.size.toString() + " events"
-                    eventText.isVisible = true
-                } else {
-                    eventText.isVisible = false
-                }
+            val eventDate = Date(event.start)
+            if (DateFormat.equalDatesByDay(calendarDate, eventDate)) {
+                dayEvents.add(event)
+                eventText.text = dayEvents.size.toString() + " events"
             }
         }
     }

@@ -169,10 +169,6 @@ class NewEventFragment : BaseFragment() {
                 val event = Event(
                     userId = userId,
                     tittle = tittle,
-                    time = DateFormat.timeFormat.format(startDate),
-                    date = DateFormat.dateFormat.format(startDate),
-                    month = DateFormat.monthFormat.format(startDate),
-                    year = DateFormat.yearFormat.format(startDate),
                     start = startDate.time,
                     ending = endDate.time,
                     repeat = repeat,

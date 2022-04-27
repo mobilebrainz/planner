@@ -22,7 +22,6 @@
         android:textColor="@color/textColorDark"
         android:textSize="10sp"
         android:textStyle="bold"
-        android:visibility="gone"
         tools:ignore="SmallSp" />
 
 </LinearLayout>

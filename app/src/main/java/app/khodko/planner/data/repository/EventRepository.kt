@@ -23,12 +23,5 @@ class EventRepository(private val eventDao: EventDao) {
     suspend fun getEvents(userId: Long) = eventDao.getEvents(userId)
 
     @WorkerThread
-    suspend fun getEventsByDate(userId: Long, date: String) = eventDao.getEventsByDate(userId, date)
-
-    @WorkerThread
-    suspend fun getEventsByMonthAndYear(userId: Long, month: String, year: String) =
-        eventDao.getEventsByMonthAndYear(userId, month, year)
-
-    @WorkerThread
     suspend fun getEvent(id: Long) = eventDao.getEvent(id)
 }

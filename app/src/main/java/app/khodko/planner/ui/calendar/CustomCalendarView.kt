@@ -24,6 +24,7 @@ class CustomCalendarView @JvmOverloads constructor(
     private var gridView: GridView
     private var currentDate: TextView
     private lateinit var adapter: CalendarGridAdapter
+    private val events = mutableListOf<Event>()
 
     val calendar: Calendar = Calendar.getInstance(Locale.ENGLISH)
     private val dates = mutableListOf<Date>()
@@ -31,11 +32,6 @@ class CustomCalendarView @JvmOverloads constructor(
     private var clickListener: ((Date) -> Unit)? = null
     fun onClickListener(listener: (Date) -> Unit) {
         clickListener = listener
-    }
-
-    private var changeMonth: (() -> Unit)? = null
-    fun onChangeMonth(listener: () -> Unit) {
-        changeMonth = listener
     }
 
     init {
@@ -47,14 +43,20 @@ class CustomCalendarView @JvmOverloads constructor(
         initListeners()
     }
 
+    fun setEvents(events: List<Event>) {
+        this.events.clear()
+        this.events.addAll(events)
+        setUpCalendar()
+    }
+
     private fun initListeners() {
         previousButton.setOnClickListener {
             calendar.add(Calendar.MONTH, -1)
-            changeMonth?.apply { invoke() }
+            setUpCalendar()
         }
         nextButton.setOnClickListener {
             calendar.add(Calendar.MONTH, 1)
-            changeMonth?.apply { invoke() }
+            setUpCalendar()
         }
         gridView.setOnItemClickListener { _, _, position, _ ->
             val date = dates[position]
@@ -62,7 +64,7 @@ class CustomCalendarView @JvmOverloads constructor(
         }
     }
 
-    fun setUpCalendar(events: List<Event>) {
+    private fun setUpCalendar() {
         val currDate = DateFormat.monthYearFormat.format(calendar.time)
         currentDate.text = currDate
 
