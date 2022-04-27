@@ -32,9 +32,9 @@ class CalendarGridAdapter(
         val monthDate: Date? = dates[position]
         val dateCalendar: Calendar = Calendar.getInstance()
         dateCalendar.time = monthDate!!
-        val dayNo = dateCalendar.get(Calendar.DAY_OF_MONTH)
-        val displayMonth = dateCalendar.get(Calendar.MONTH) + 1
-        val displayYear = dateCalendar.get(Calendar.YEAR)
+        val day = dateCalendar.get(Calendar.DAY_OF_MONTH)
+        val month = dateCalendar.get(Calendar.MONTH) + 1
+        val year = dateCalendar.get(Calendar.YEAR)
         val currentYear = currentDate.get(Calendar.YEAR)
         val currentMonth = currentDate.get(Calendar.MONTH) + 1
 
@@ -44,14 +44,14 @@ class CalendarGridAdapter(
                 .inflate(R.layout.calendar_cell_layout, parent, false)
 
             val cellNumber: TextView = view.findViewById(R.id.calendar_day)
-            cellNumber.text = dayNo.toString()
+            cellNumber.text = day.toString()
 
             var textColor = R.color.calendarMonthDayTextColor
             val backguoundColor = when {
                 currDate == DateFormat.dateFormat.format(monthDate) -> {
                     R.color.calendarCurrentDayColor
                 }
-                displayMonth == currentMonth && displayYear == currentYear -> {
+                month == currentMonth && year == currentYear -> {
                     R.color.calendarMonthDayColor
                 }
                 else -> {
@@ -63,28 +63,31 @@ class CalendarGridAdapter(
             cellNumber.setTextColor(view.context.getColor(textColor))
 
             val eventText: TextView = view.findViewById(R.id.event_id)
-            val eventCalendar: Calendar = Calendar.getInstance()
-
-            val dayEvents = mutableListOf<Event>()
-            for (event in events) {
-                DateFormat.toDate(event.date)?.let { date ->
-                    eventCalendar.time = date
-                    if (dayNo == eventCalendar.get(Calendar.DAY_OF_MONTH)
-                        && displayMonth == eventCalendar.get(Calendar.MONTH) + 1
-                        && displayYear == eventCalendar.get(Calendar.YEAR)
-                    ) {
-                        dayEvents.add(event)
-                        eventText.text = dayEvents.size.toString() + " events"
-                        eventText.isVisible = true
-                    } else {
-                        eventText.isVisible = false
-                    }
-                }
-            }
+            showEvents(eventText, day, month, year)
         } else {
             view = convertView
         }
         return view
+    }
+
+    private fun showEvents(eventText: TextView, day: Int, month: Int, year: Int ) {
+        val calendar: Calendar = Calendar.getInstance()
+        val dayEvents = mutableListOf<Event>()
+        for (event in events) {
+            DateFormat.toDate(event.date)?.let { date ->
+                calendar.time = date
+                if (day == calendar.get(Calendar.DAY_OF_MONTH)
+                    && month == calendar.get(Calendar.MONTH) + 1
+                    && year == calendar.get(Calendar.YEAR)
+                ) {
+                    dayEvents.add(event)
+                    eventText.text = dayEvents.size.toString() + " events"
+                    eventText.isVisible = true
+                } else {
+                    eventText.isVisible = false
+                }
+            }
+        }
     }
 
     override fun getCount(): Int {
