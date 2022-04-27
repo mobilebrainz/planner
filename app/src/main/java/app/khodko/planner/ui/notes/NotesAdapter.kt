@@ -3,12 +3,13 @@ package app.khodko.planner.ui.notes
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import app.khodko.planner.data.entity.Note
 
 
-class NotesAdapter : ListAdapter<Note, NoteViewHolder>(REPO_COMPARATOR) {
+class NotesAdapter() : RecyclerView.Adapter<NoteViewHolder>() {
 
+    var notes: ArrayList<Note> = arrayListOf()
     var shotClickListener: ((Note, v: View) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
@@ -16,22 +17,36 @@ class NotesAdapter : ListAdapter<Note, NoteViewHolder>(REPO_COMPARATOR) {
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        val item = getItem(position)
-        item?.let {
-            shotClickListener?.apply {
-                holder.itemView.setOnClickListener { invoke(item, it) }
-            }
-            holder.bind(item)
+        val note = notes[position]
+        shotClickListener?.apply {
+            holder.itemView.setOnClickListener { invoke(note, it) }
         }
+        holder.bind(note)
     }
 
-    companion object {
-        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Note>() {
-            override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean =
-                oldItem.id == newItem.id
+    override fun getItemCount() = notes.size
 
-            override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean =
-                oldItem == newItem
-        }
+    fun setData(newItems: ArrayList<Note>) {
+        val diffResult = DiffUtil.calculateDiff(BaseDiffCallback(notes, newItems))
+        notes.clear()
+        notes.addAll(newItems)
+        diffResult.dispatchUpdatesTo(this)
     }
+
+    inner class BaseDiffCallback(
+        private val oldList: List<Note>, private val newList: List<Note>
+    ) : DiffUtil.Callback() {
+
+        override fun getOldListSize(): Int = oldList.size
+
+        override fun getNewListSize(): Int = newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+            oldList[oldItemPosition].id == newList[newItemPosition].id
+
+        override fun areContentsTheSame(oldPosition: Int, newPosition: Int) =
+            oldList[oldPosition] == newList[newPosition]
+    }
+
 }
+

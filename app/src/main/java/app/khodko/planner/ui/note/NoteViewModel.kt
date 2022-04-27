@@ -20,7 +20,7 @@ class NoteViewModel(
     private val _deletedNote = SingleLiveEvent<Boolean>()
     val deletedNote: LiveData<Boolean> = _deletedNote
 
-    init {
+    fun load() {
         if (id > 0) {
             viewModelScope.launch {
                 val notes = noteRepository.getNote(id)

@@ -35,9 +35,11 @@ class AddNoteViewModel(
         viewModelScope.launch {
             if (id > 0) {
                 note.id = id
+                noteRepository.update(note)
+            } else {
+                id = noteRepository.insert(note)
+                note.id = id
             }
-            val newId = noteRepository.insert(note)
-            id = newId
             _note.value = note
             _savedNote.value = true
         }

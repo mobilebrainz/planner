@@ -29,12 +29,12 @@ inline fun <reified T> Fragment.showSelectDialogExt(
 
 fun Fragment.showAlertDialogExt(
     @StringRes messageId: Int,
-    listener: (di: DialogInterface, i: Int) -> Unit
+    listener: () -> Unit
 ): AlertDialog {
     val dialog = AlertDialog.Builder(requireContext())
         .setMessage(messageId)
-        .setPositiveButton(android.R.string.ok) { v1, v2 ->
-            listener.invoke(v1, v2)
+        .setPositiveButton(android.R.string.ok) { _, _ ->
+            listener.invoke()
         }
         .setNegativeButton(android.R.string.cancel) { _, _ -> }
         .create()

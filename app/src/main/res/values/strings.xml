@@ -12,6 +12,7 @@
     <string name="menu_item_actions">Actions</string>
     <string name="menu_calendar">Calendar</string>
     <string name="menu_event">Event</string>
+    <string name="menu_new_event">New Event</string>
     <string name="menu_notes">Notes</string>
     <string name="menu_note">Note</string>
     <string name="menu_profile">Profile</string>
@@ -28,6 +29,7 @@
     <string name="name_hint">Name</string>
     <string name="tittle_hint">Tittle</string>
     <string name="note_hint">Note</string>
+    <string name="description_hint">Description</string>
     <string name="password_hint">Password</string>
     <string name="email_hint">Email</string>
     <string name="name_field_error">Name field is required!</string>
@@ -41,13 +43,35 @@
     <string name="save_btn">Save</string>
     <string name="logout_btn">Log Out</string>
     <string name="switch_themes">Night Theme</string>
+    <string name="switch_all_days">All Days</string>
     <string name="user_saved">User saved successfully!</string>
     <string name="note_saved">Note saved successfully!</string>
+    <string name="event_saved">Event saved successfully!</string>
+    <string name="event_date">Event Date</string>
     <string name="tittle_field_error">Tittle field is required!</string>
     <string name="note_field_error">Note field is required!</string>
     <string name="no_results">No results 😓</string>
+    <string name="no_events">No events</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_delete">Delete</string>
+
+    <string name="input_date">Input Date</string>
+    <string name="input_start_time">Input Start Time</string>
+    <string name="input_end_time">Input End Time</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="dialog_delete">Delete 1 object?</string>
+    <string name="dialog_logout">Are you sure you want to log out?</string>
+    <string name="text_repeat">Repeat:</string>
+    <string name="repeat_btn">Repeat</string>
+    <string name="repeat_once">Once</string>
+    <string name="repeat_daily">Daily</string>
+    <string name="repeat_on_weekdays">On weekdays</string>
+    <string name="repeat_annualy">Annualy</string>
+    <string name="text_tittle">Tittle:</string>
+    <string name="text_description">Description:</string>
+    <string name="text_event_date">Event date:</string>
+
 
     <string name="info_view"><![CDATA[
         <h4>Лабораторна работа №4 (Планировщик)</h4>

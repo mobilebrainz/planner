@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import app.khodko.planner.R
+import app.khodko.planner.core.extension.showAlertDialogExt
 import app.khodko.planner.databinding.ActivityMainBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
@@ -54,7 +55,11 @@ class MainActivity : BasePermissionActivity(),
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         var handled = true
         when (menuItem.itemId) {
-            R.id.logout -> logOut()
+            R.id.logout -> {
+                showAlertDialogExt(R.string.dialog_logout) {
+                    logOut()
+                }
+            }
             else -> handled = menuItem.onNavDestinationSelected(navController)
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)

@@ -8,6 +8,8 @@ import app.khodko.planner.R
 import app.khodko.planner.core.BaseFragment
 import app.khodko.planner.core.extension.getViewModelExt
 import app.khodko.planner.core.extension.navigateExt
+import app.khodko.planner.core.extension.showAlertDialogExt
+import app.khodko.planner.core.stringToBitmap
 import app.khodko.planner.databinding.FragmentNoteBinding
 
 class NoteFragment : BaseFragment() {
@@ -38,6 +40,7 @@ class NoteFragment : BaseFragment() {
                 )
             }
             initObservers()
+            noteViewModel.load()
         }
         return binding.root
     }
@@ -47,6 +50,11 @@ class NoteFragment : BaseFragment() {
             binding.tittleView.text = n.tittle
             binding.textView.text = n.text
             binding.dateView.text = n.datetime
+            if (n.icon.isNotEmpty()) {
+                binding.noteImage.setImageBitmap(stringToBitmap(n.icon))
+            } else {
+                binding.noteImage.setImageResource(R.drawable.ic_image_outline_24)
+            }
         }
         noteViewModel.deletedNote.observe(viewLifecycleOwner) {
             findNavController().popBackStack()
@@ -55,7 +63,7 @@ class NoteFragment : BaseFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
-        inflater.inflate(R.menu.note_fragment_options_menu, menu)
+        inflater.inflate(R.menu.redact_options_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -66,7 +74,9 @@ class NoteFragment : BaseFragment() {
                 true
             }
             R.id.delete -> {
-                noteViewModel.delete()
+                showAlertDialogExt(R.string.dialog_delete) {
+                    noteViewModel.delete()
+                }
                 true
             }
             else -> false

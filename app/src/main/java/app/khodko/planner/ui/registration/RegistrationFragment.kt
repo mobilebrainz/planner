@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import app.khodko.planner.App
 import app.khodko.planner.R
 import app.khodko.planner.core.BaseFragment
@@ -22,21 +23,24 @@ class RegistrationFragment : BaseFragment() {
     private var _binding: FragmentRegistrationBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var regstrationViewModel: RegistrationViewModel
+    private lateinit var registrationViewModel: RegistrationViewModel
     private var icon = ""
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
-        regstrationViewModel = getViewModelExt { RegistrationViewModel(App.instance.userRepository) }
-
+        registrationViewModel =
+            getViewModelExt { RegistrationViewModel(App.instance.userRepository) }
         initObservers()
         initListeners()
-
         return binding.root
     }
 
     private fun initObservers() {
-        regstrationViewModel.existUser.observe(viewLifecycleOwner) {
+        registrationViewModel.existUser.observe(viewLifecycleOwner) {
             if (it) {
                 binding.textError.visibility = View.VISIBLE
                 binding.textError.text = getString(R.string.registr_error_exists)
@@ -44,7 +48,7 @@ class RegistrationFragment : BaseFragment() {
                 binding.textError.visibility = View.GONE
             }
         }
-        regstrationViewModel.userId.observe(viewLifecycleOwner) {
+        registrationViewModel.userId.observe(viewLifecycleOwner) {
             it?.let {
                 val sharedPreferences = requireActivity().getSharedPreferences(USER_ID_PREF, 0)
                 sharedPreferences.edit().putLong(USER_ID_PREF, it).apply()
@@ -57,23 +61,27 @@ class RegistrationFragment : BaseFragment() {
     }
 
     private fun initListeners() {
-        binding.btnRegistr.setOnClickListener {
-            validate()?.let {
-                it.icon = icon
-                regstrationViewModel.save(it)
-            }
-        }
+        binding.btnRegistr.setOnClickListener { save() }
+
         binding.profileImage.setOnClickListener {
             val imageChooser = activity as ImageChooserInterface
             imageChooser.showImageChooser {
-                it?.let { binding.profileImage.setImageURI(it)
+                it?.let {
+                    binding.profileImage.setImageURI(it)
                     val btm = decodeUri(requireContext(), it, 500)
-                    icon = bitmapToString(btm!!) }
+                    icon = bitmapToString(btm!!)
+                    binding.deleteImage.isVisible = true
+                }
             }
+        }
+        binding.deleteImage.setOnClickListener {
+            icon = ""
+            binding.profileImage.setImageResource(R.drawable.ic_image_outline_24)
+            binding.deleteImage.isVisible = false
         }
     }
 
-    private fun validate(): User? {
+    private fun save() {
         val name = binding.editTextName.text.toString().trim()
         val email = binding.editTextEmail.text.toString().trim()
         val password = binding.editTextPassword.text.toString().trim()
@@ -91,10 +99,11 @@ class RegistrationFragment : BaseFragment() {
                 binding.editTextPassword.error = getString(R.string.password_field_error)
             }
             else -> {
-                return User(name = name, password = password, email = email)
+                val user = User(name = name, password = password, email = email)
+                user.icon = icon
+                registrationViewModel.save(user)
             }
         }
-        return null
     }
 
     override fun onDestroyView() {

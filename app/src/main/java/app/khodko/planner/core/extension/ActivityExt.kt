@@ -7,6 +7,8 @@ import android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 
 fun Activity.hideSoftKeyboardExt() {
@@ -43,6 +45,21 @@ fun Activity.showErrorSnackbarExt(
             setAction(actionResId, View.OnClickListener(listener::invoke))
             show()
         }
+}
+
+fun Activity.showAlertDialogExt(
+    @StringRes messageId: Int,
+    listener: () -> Unit
+): AlertDialog {
+    val dialog = AlertDialog.Builder(this)
+        .setMessage(messageId)
+        .setPositiveButton(android.R.string.ok) { _, _ ->
+            listener.invoke()
+        }
+        .setNegativeButton(android.R.string.cancel) { _, _ -> }
+        .create()
+    dialog.show()
+    return dialog
 }
 
 
