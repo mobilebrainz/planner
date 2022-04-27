@@ -19,9 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textColor="@color/textColorDark"
-        android:textSize="10sp"
-        android:textStyle="bold"
-        tools:ignore="SmallSp" />
+        android:textColor="@color/md_orange_900"
+        android:textSize="11sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

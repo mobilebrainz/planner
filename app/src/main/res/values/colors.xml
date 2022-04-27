@@ -24,8 +24,8 @@
     <color name="cardBackground">#F0F2FF</color>
     <color name="colorLight">@color/md_blue_grey_300</color>
 
-    <color name="calendarCurrentDayColor">#BCC2FF</color>
-    <color name="calendarMonthDayColor">@color/appBackground</color>
+    <color name="calendarCurrentDayColor">@color/md_white_1000</color>
+    <color name="calendarMonthDayColor">@color/md_indigo_100</color>
     <color name="calendarAnotherDayColor">@color/md_blue_grey_50</color>
     <color name="calendarMonthDayTextColor">@color/textColorDark</color>
     <color name="calendarAnotherDayTextColor">@color/textColorHint</color>

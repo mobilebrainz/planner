@@ -73,9 +73,9 @@ class CalendarGridAdapter(
         val dayEvents = mutableListOf<Event>()
         for (event in events) {
             val eventDate = Date(event.start)
-            if (DateFormat.equalDatesByDay(calendarDate, eventDate)) {
+            if (DateFormat.isDate(event.repeat, eventDate, calendarDate)) {
                 dayEvents.add(event)
-                eventText.text = dayEvents.size.toString() + " events"
+                eventText.text = dayEvents.size.toString()
             }
         }
     }

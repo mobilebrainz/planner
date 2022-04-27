@@ -45,6 +45,7 @@ class NewEventFragment : BaseFragment() {
             }
             initObservers()
             initListeners()
+            binding.onceRadio.isChecked = true
         }
         binding.timePicker.setIs24HourView(true)
         return binding.root
@@ -66,7 +67,10 @@ class NewEventFragment : BaseFragment() {
         binding.repeatRadioGroup.setOnCheckedChangeListener { _, view ->
             var label = R.string.repeat_once
             repeat = when (view) {
-                R.id.onceRadio -> 0
+                R.id.onceRadio -> {
+                    label = R.string.repeat_once
+                    0
+                }
                 R.id.dailyRadio -> {
                     label = R.string.repeat_daily
                     1

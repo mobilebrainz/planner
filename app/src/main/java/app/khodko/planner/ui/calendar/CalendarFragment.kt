@@ -76,7 +76,7 @@ class CalendarFragment : BaseFragment() {
         val dayEvents = mutableListOf<Event>()
         for (event in events) {
             val eventDate = Date(event.start)
-            if (DateFormat.equalDatesByDay(eventDate, calendarViewModel.clickDate)) {
+            if (DateFormat.isDate(event.repeat, eventDate, calendarViewModel.clickDate)) {
                 dayEvents.add(event)
             }
         }
