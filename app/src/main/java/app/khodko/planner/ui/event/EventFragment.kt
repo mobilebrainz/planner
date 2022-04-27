@@ -51,6 +51,15 @@ class EventFragment : BaseFragment() {
             binding.tittleView.text = e.tittle
             binding.dateView.text = DateFormat.rangeDate(Date(e.start), Date(e.ending))
             binding.descriptionView.text = e.description
+
+            val repeatResId = when (e.repeat) {
+                0 -> R.string.repeat_once
+                1 -> R.string.repeat_daily
+                2 -> R.string.repeat_on_weekdays
+                3 -> R.string.repeat_annualy
+                else -> R.string.repeat_once
+            }
+            binding.repeatView.text = getString(repeatResId)
         }
         eventViewModel.deletedEvent.observe(viewLifecycleOwner) {
             findNavController().popBackStack()

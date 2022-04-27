@@ -62,6 +62,16 @@
     <string name="btn_cancel">Cancel</string>
     <string name="dialog_delete">Delete 1 object?</string>
     <string name="dialog_logout">Are you sure you want to log out?</string>
+    <string name="text_repeat">Repeat:</string>
+    <string name="repeat_btn">Repeat</string>
+    <string name="repeat_once">Once</string>
+    <string name="repeat_daily">Daily</string>
+    <string name="repeat_on_weekdays">On weekdays</string>
+    <string name="repeat_annualy">Annualy</string>
+    <string name="text_tittle">Tittle:</string>
+    <string name="text_description">Description:</string>
+    <string name="text_event_date">Event date:</string>
+
 
     <string name="info_view"><![CDATA[
         <h4>Лабораторна работа №4 (Планировщик)</h4>

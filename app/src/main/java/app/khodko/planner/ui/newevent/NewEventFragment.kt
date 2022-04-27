@@ -26,6 +26,7 @@ class NewEventFragment : BaseFragment() {
     private var start = false
     private var startDate: Date = Calendar.getInstance().time
     private var endDate: Date = Calendar.getInstance().time
+    private var repeat = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,8 +59,34 @@ class NewEventFragment : BaseFragment() {
     }
 
     private fun initListeners() {
+        binding.repeatBtn.setOnClickListener {
+            binding.repeatRadioGroup.isVisible = !binding.repeatRadioGroup.isVisible
+        }
+
+        binding.repeatRadioGroup.setOnCheckedChangeListener { _, view ->
+            var label = R.string.repeat_once
+            repeat = when (view) {
+                R.id.onceRadio -> 0
+                R.id.dailyRadio -> {
+                    label = R.string.repeat_daily
+                    1
+                }
+                R.id.weekdaysRadio -> {
+                    label = R.string.repeat_on_weekdays
+                    2
+                }
+                R.id.annualyRadio -> {
+                    label = R.string.repeat_annualy
+                    3
+                }
+                else -> 0
+            }
+            binding.repeatBtn.text = getString(R.string.repeat_btn) + ": " + getString(label)
+        }
+
         binding.startBtn.setOnClickListener {
             hideSoftKeyboardExt()
+            binding.repeatRadioGroup.isVisible = false
             binding.datePickerView.isVisible = true
             fab.hide()
             start = true
@@ -148,7 +175,7 @@ class NewEventFragment : BaseFragment() {
                     year = DateFormat.yearFormat.format(startDate),
                     start = startDate.time,
                     ending = endDate.time,
-                    repeat = 1,
+                    repeat = repeat,
                     description = description
                 )
                 newEventViewModel.save(event)
@@ -165,7 +192,19 @@ class NewEventFragment : BaseFragment() {
             binding.editDescription.setText(e.description)
             startDate = Date(e.start)
             endDate = Date(e.ending)
+            initRepeat(e.repeat)
             binding.startBtn.text = DateFormat.rangeDate(startDate, endDate)
+        }
+    }
+
+    private fun initRepeat(repeat: Int) {
+        this.repeat = repeat
+        when (repeat) {
+            0 -> binding.onceRadio.isChecked = true
+            1 -> binding.dailyRadio.isChecked = true
+            2 -> binding.weekdaysRadio.isChecked = true
+            3 -> binding.annualyRadio.isChecked = true
+            else -> binding.onceRadio.isChecked = true
         }
     }
 

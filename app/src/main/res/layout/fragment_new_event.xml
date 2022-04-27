@@ -59,6 +59,46 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:id="@+id/repeatBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/repeat_btn" />
+
+        <RadioGroup
+            android:id="@+id/repeatRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="gone">
+
+            <RadioButton
+                android:id="@+id/onceRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/repeat_once" />
+
+            <RadioButton
+                android:id="@+id/dailyRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/repeat_daily" />
+
+            <RadioButton
+                android:id="@+id/weekdaysRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/repeat_on_weekdays" />
+
+            <RadioButton
+                android:id="@+id/annualyRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/repeat_annualy" />
+
+        </RadioGroup>
+
+        <Button
             android:id="@+id/startBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

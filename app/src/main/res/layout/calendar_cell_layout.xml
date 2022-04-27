@@ -2,15 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="46dp"
     android:orientation="vertical"
+    android:gravity="center"
     android:padding="4dp">
 
     <TextView
         android:id="@+id/calendar_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:textSize="14sp"
         android:textStyle="bold" />
 
@@ -19,9 +19,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textColor="@color/textColorDark"
         android:textSize="10sp"
         android:textStyle="bold"
-        android:textColor="@color/textColorDark"
+        android:visibility="gone"
         tools:ignore="SmallSp" />
 
 </LinearLayout>
