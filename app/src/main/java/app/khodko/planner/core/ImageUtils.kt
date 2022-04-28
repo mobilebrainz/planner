@@ -45,7 +45,7 @@ fun decodeUri(context: Context, uri: Uri, size: Int): Bitmap? {
 
 fun bitmapToString(bitmap: Bitmap): String {
     val baos = ByteArrayOutputStream()
-    bitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos)
+    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
     return Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT)
 }
 
