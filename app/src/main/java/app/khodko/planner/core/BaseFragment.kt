@@ -1,13 +1,11 @@
 package app.khodko.planner.core
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.MainThread
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import app.khodko.planner.core.extension.hideSoftKeyboardExt
 import app.khodko.planner.ui.activity.FabActivity
@@ -23,13 +21,7 @@ abstract class BaseFragment : Fragment() {
     private var errorSnackbar: Snackbar? = null
     private var infoSnackbar: Snackbar? = null
 
-    protected lateinit var sharedPreferences: SharedPreferences
     protected lateinit var fab: FloatingActionButton
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initNightTheme()
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -49,14 +41,6 @@ abstract class BaseFragment : Fragment() {
             requireActivity().finish()
         }
         return userId
-    }
-
-    private fun initNightTheme() {
-        sharedPreferences = requireActivity().getSharedPreferences("night", 0)
-        val booleanValue = sharedPreferences.getBoolean("night_mode", false)
-        if (booleanValue) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
     }
 
     @MainThread

@@ -21,12 +21,17 @@
             android:layout_marginBottom="10dp"
             android:layout_gravity="center_horizontal">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/profile_image"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
                 android:contentDescription="@string/image_desc_image"
-                android:src="@drawable/ic_image_outline_24" />
+                android:padding="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_account_outline_24"
+                app:shapeAppearanceOverlay="@style/RoundedImageViewRounded"
+                app:strokeColor="@color/colorAccent"
+                app:strokeWidth="4dp" />
 
             <ImageView
                 android:id="@+id/delete_image"
@@ -42,6 +47,7 @@
             android:id="@+id/textError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:textColor="@color/textColorRequied"
             android:textSize="16sp"
             android:visibility="gone" />

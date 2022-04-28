@@ -33,4 +33,8 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+    <style name="RoundedImageViewRounded">
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

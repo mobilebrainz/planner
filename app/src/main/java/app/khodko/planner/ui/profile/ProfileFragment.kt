@@ -56,7 +56,7 @@ class ProfileFragment : BaseFragment() {
         }
         binding.deleteImage.setOnClickListener {
             icon = ""
-            binding.profileImage.setImageResource(R.drawable.ic_image_outline_24)
+            binding.profileImage.setImageResource(R.drawable.ic_account_outline_24)
             binding.deleteImage.isVisible = false
         }
     }
@@ -83,7 +83,7 @@ class ProfileFragment : BaseFragment() {
                     icon = u.icon
                     binding.deleteImage.isVisible = true
                 } else {
-                    binding.profileImage.setImageResource(R.drawable.ic_image_outline_24)
+                    binding.profileImage.setImageResource(R.drawable.ic_account_outline_24)
                     binding.deleteImage.isVisible = false
                 }
             }

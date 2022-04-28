@@ -2,10 +2,10 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/NestedScrollBarStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/appBackground"
-    style="@style/NestedScrollBarStyle"
     tools:context=".ui.login.LoginFragment">
 
     <LinearLayout
@@ -17,16 +17,21 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_marginBottom="10dp">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/profile_image"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
                 android:contentDescription="@string/image_desc_image"
-                android:src="@drawable/ic_image_outline_24" />
+                android:padding="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_account_outline_24"
+                app:shapeAppearanceOverlay="@style/RoundedImageViewRounded"
+                app:strokeColor="@color/colorAccent"
+                app:strokeWidth="4dp" />
 
             <ImageView
                 android:id="@+id/delete_image"
@@ -34,26 +39,15 @@
                 android:layout_height="24dp"
                 android:layout_gravity="end"
                 android:src="@drawable/ic_close_24"
-                tools:ignore="ContentDescription"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                tools:ignore="ContentDescription" />
         </FrameLayout>
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switchCompat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:checked="false"
-            android:text="@string/switch_themes"
-            android:textColor="@color/textColorDark"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:switchPadding="10dp" />
 
         <TextView
             android:id="@+id/textError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:textColor="@color/textColorRequied"
             android:textSize="16sp"
             android:visibility="gone" />

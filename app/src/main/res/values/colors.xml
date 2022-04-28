@@ -8,7 +8,7 @@
     <color name="colorSecondary">@color/md_indigo_400</color>
     <color name="colorSecondaryDark">@color/md_indigo_900</color>
     <color name="toolbarBackground">@color/md_white_1000</color>
-    <color name="splashScreenBackground">#BCC2FF</color>
+    <color name="splashScreenBackground">@color/appBackground</color>
 
     <!-- text colors -->
     <color name="textColorLight">@color/md_blue_grey_500</color>
