@@ -10,12 +10,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="6dp"
+        android:paddingHorizontal="6dp"
         android:orientation="vertical">
 
-        <app.khodko.planner.ui.calendar.CustomCalendarView
-            android:id="@+id/custom_calendar_view"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/appBackground"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp">
+
+            <app.khodko.planner.ui.calendar.CustomCalendarView
+                android:id="@+id/custom_calendar_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -23,8 +34,8 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/appBackground"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="1dp">
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"

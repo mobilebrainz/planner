@@ -45,6 +45,7 @@ class NewEventFragment : BaseFragment() {
             }
             initObservers()
             initListeners()
+            binding.onceRadio.isChecked = true
         }
         binding.timePicker.setIs24HourView(true)
         return binding.root
@@ -60,13 +61,17 @@ class NewEventFragment : BaseFragment() {
 
     private fun initListeners() {
         binding.repeatBtn.setOnClickListener {
+            hideSoftKeyboardExt()
             binding.repeatRadioGroup.isVisible = !binding.repeatRadioGroup.isVisible
         }
 
         binding.repeatRadioGroup.setOnCheckedChangeListener { _, view ->
             var label = R.string.repeat_once
             repeat = when (view) {
-                R.id.onceRadio -> 0
+                R.id.onceRadio -> {
+                    label = R.string.repeat_once
+                    0
+                }
                 R.id.dailyRadio -> {
                     label = R.string.repeat_daily
                     1
@@ -169,10 +174,6 @@ class NewEventFragment : BaseFragment() {
                 val event = Event(
                     userId = userId,
                     tittle = tittle,
-                    time = DateFormat.timeFormat.format(startDate),
-                    date = DateFormat.dateFormat.format(startDate),
-                    month = DateFormat.monthFormat.format(startDate),
-                    year = DateFormat.yearFormat.format(startDate),
                     start = startDate.time,
                     ending = endDate.time,
                     repeat = repeat,

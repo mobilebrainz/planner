@@ -14,6 +14,57 @@ object DateFormat {
     val prettyDateFormat: SimpleDateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH)
     val dateTimeFormat: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.ENGLISH)
 
+    fun isDate(repeat: Int, eventDate: Date, clickDate: Date) =
+        DateFormat.isOnce(eventDate, clickDate)
+                || DateFormat.isDaily(repeat, eventDate, clickDate)
+                || DateFormat.isWeakly(repeat, eventDate, clickDate)
+                || DateFormat.isAnnually(repeat, eventDate, clickDate)
+
+    fun isOnce(eventDate: Date, clickDate: Date) =
+        DateFormat.equalDatesByDay(eventDate, clickDate)
+
+    fun isDaily(repeat: Int, eventDate: Date, clickDate: Date) =
+        repeat == 1 && eventDate.before(clickDate)
+
+    fun isWeakly(repeat: Int, eventDate: Date, clickDate: Date) =
+        repeat == 2 && eventDate.before(clickDate) && DateFormat.equalDatesByWeakDay(
+            eventDate,
+            clickDate
+        )
+
+    fun isAnnually(repeat: Int, eventDate: Date, clickDate: Date) =
+        repeat == 3 && eventDate.before(clickDate) && DateFormat.equalDatesByYear(
+            eventDate,
+            clickDate
+        )
+
+    fun equalDatesByDay(date1: Date, date2: Date): Boolean {
+        val c1: Calendar = Calendar.getInstance()
+        c1.time = date1
+        val c2: Calendar = Calendar.getInstance()
+        c2.time = date2
+        return c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR) &&
+                c1.get(Calendar.MONTH) == c2.get(Calendar.MONTH) &&
+                c1.get(Calendar.DAY_OF_MONTH) == c2.get(Calendar.DAY_OF_MONTH)
+    }
+
+    fun equalDatesByWeakDay(date1: Date, date2: Date): Boolean {
+        val c1: Calendar = Calendar.getInstance()
+        c1.time = date1
+        val c2: Calendar = Calendar.getInstance()
+        c2.time = date2
+        return c1.get(Calendar.DAY_OF_WEEK) == c2.get(Calendar.DAY_OF_WEEK)
+    }
+
+    fun equalDatesByYear(date1: Date, date2: Date): Boolean {
+        val c1: Calendar = Calendar.getInstance()
+        c1.time = date1
+        val c2: Calendar = Calendar.getInstance()
+        c2.time = date2
+        return c1.get(Calendar.MONTH) == c2.get(Calendar.MONTH) &&
+                c1.get(Calendar.DAY_OF_MONTH) == c2.get(Calendar.DAY_OF_MONTH)
+    }
+
     fun rangeDate(start: Date, ending: Date) =
         dateTimeFormat.format(start) + " - " + timeFormat.format(ending)
 

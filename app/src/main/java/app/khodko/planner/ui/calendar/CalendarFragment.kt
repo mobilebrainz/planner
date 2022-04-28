@@ -15,6 +15,7 @@ import app.khodko.planner.core.extension.navigateExt
 import app.khodko.planner.core.extension.showAlertDialogExt
 import app.khodko.planner.data.entity.Event
 import app.khodko.planner.databinding.FragmentCalendarBinding
+import java.util.*
 
 class CalendarFragment : BaseFragment() {
 
@@ -22,6 +23,8 @@ class CalendarFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     private lateinit var calendarViewModel: CalendarViewModel
+    private var events: List<Event> = ArrayList()
+    private val adapter = EventsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,14 +40,10 @@ class CalendarFragment : BaseFragment() {
         }
         initListeners()
         initObservers()
-        load()
+        initEventRecycler()
+        calendarViewModel.loadEvents()
         binding.dateView.text = DateFormat.prettyDateFormat.format(calendarViewModel.clickDate)
         return binding.root
-    }
-
-    private fun load() {
-        calendarViewModel.loadEventsByMonth(calendarViewModel.clickDate)
-        calendarViewModel.loadEventsByDate(calendarViewModel.clickDate)
     }
 
     override fun initFab() {
@@ -56,46 +55,51 @@ class CalendarFragment : BaseFragment() {
     }
 
     private fun initListeners() {
-        binding.customCalendarView.onChangeMonth {
-            calendarViewModel.loadEventsByMonth(binding.customCalendarView.calendar.time)
-        }
-
         binding.customCalendarView.onClickListener { date ->
             calendarViewModel.clickDate = date
             binding.dateView.text = DateFormat.prettyDateFormat.format(date)
-            calendarViewModel.loadEventsByDate(date)
+            showDayEvents()
         }
     }
 
     private fun initObservers() {
-        calendarViewModel.monthEvents.observe(viewLifecycleOwner) { events ->
-            binding.customCalendarView.setUpCalendar(events)
+        calendarViewModel.events.observe(viewLifecycleOwner) { events ->
+            binding.customCalendarView.setEvents(events)
+            this.events = events
+            showDayEvents()
         }
 
-        calendarViewModel.dayEvents.observe(viewLifecycleOwner) { events ->
-            if (events.isEmpty()) {
-                binding.eventsView.visibility = View.GONE
-                binding.emptyView.visibility = View.VISIBLE
-            } else {
-                binding.eventsView.visibility = View.VISIBLE
-                binding.emptyView.visibility = View.GONE
-            }
-            initRecycler(events)
+        calendarViewModel.deletedEvent.observe(viewLifecycleOwner) {
+            calendarViewModel.loadEvents()
         }
-        calendarViewModel.deletedEvent.observe(viewLifecycleOwner) { load() }
     }
 
-    private fun initRecycler(events: List<Event>) {
+    private fun showDayEvents() {
+        val dayEvents = mutableListOf<Event>()
+        for (event in events) {
+            val eventDate = Date(event.start)
+            if (DateFormat.isDate(event.repeat, eventDate, calendarViewModel.clickDate)) {
+                dayEvents.add(event)
+            }
+        }
+        if (dayEvents.isEmpty()) {
+            binding.eventsView.visibility = View.GONE
+            binding.emptyView.visibility = View.VISIBLE
+        } else {
+            binding.eventsView.visibility = View.VISIBLE
+            binding.emptyView.visibility = View.GONE
+        }
+        adapter.submitList(dayEvents)
+    }
+
+    private fun initEventRecycler() {
         val recyclerView = binding.eventsView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
         recyclerView.isNestedScrollingEnabled = true
-
-        val adapter = EventsAdapter()
         recyclerView.adapter = adapter
-        adapter.submitList(events)
-
         addDividers()
+
         adapter.shotClickListener = { event, _ ->
             navigateExt(CalendarFragmentDirections.actionNavCalendarToNavEvent(event.id))
         }

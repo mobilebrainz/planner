@@ -75,7 +75,6 @@
                 android:id="@+id/onceRadio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="true"
                 android:text="@string/repeat_once" />
 
             <RadioButton
@@ -114,8 +113,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/appBackground"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="1dp">
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:id="@+id/datePickerView"

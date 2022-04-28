@@ -11,7 +11,6 @@ import app.khodko.planner.core.BaseFragment
 import app.khodko.planner.core.bitmapToString
 import app.khodko.planner.core.decodeUri
 import app.khodko.planner.core.extension.getViewModelExt
-import app.khodko.planner.core.extension.navigateExt
 import app.khodko.planner.core.extension.showAlertDialogExt
 import app.khodko.planner.core.stringToBitmap
 import app.khodko.planner.data.entity.User
@@ -19,7 +18,6 @@ import app.khodko.planner.databinding.FragmentProfileBinding
 import app.khodko.planner.ui.activity.ImageChooserInterface
 import app.khodko.planner.ui.activity.LoginActivity
 import app.khodko.planner.ui.activity.USER_ID_PREF
-import app.khodko.planner.ui.note.NoteFragmentDirections
 
 class ProfileFragment : BaseFragment() {
 
@@ -58,7 +56,7 @@ class ProfileFragment : BaseFragment() {
         }
         binding.deleteImage.setOnClickListener {
             icon = ""
-            binding.profileImage.setImageResource(R.drawable.ic_image_outline_24)
+            binding.profileImage.setImageResource(R.drawable.ic_account_outline_24)
             binding.deleteImage.isVisible = false
         }
     }
@@ -85,7 +83,7 @@ class ProfileFragment : BaseFragment() {
                     icon = u.icon
                     binding.deleteImage.isVisible = true
                 } else {
-                    binding.profileImage.setImageResource(R.drawable.ic_image_outline_24)
+                    binding.profileImage.setImageResource(R.drawable.ic_account_outline_24)
                     binding.deleteImage.isVisible = false
                 }
             }
