@@ -24,6 +24,7 @@ class CalendarFragment : BaseFragment() {
 
     private lateinit var calendarViewModel: CalendarViewModel
     private var events: List<Event> = ArrayList()
+    private val adapter = EventsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +40,7 @@ class CalendarFragment : BaseFragment() {
         }
         initListeners()
         initObservers()
+        initEventRecycler()
         calendarViewModel.loadEvents()
         binding.dateView.text = DateFormat.prettyDateFormat.format(calendarViewModel.clickDate)
         return binding.root
@@ -56,7 +58,7 @@ class CalendarFragment : BaseFragment() {
         binding.customCalendarView.onClickListener { date ->
             calendarViewModel.clickDate = date
             binding.dateView.text = DateFormat.prettyDateFormat.format(date)
-            initRecycler()
+            showDayEvents()
         }
     }
 
@@ -64,7 +66,7 @@ class CalendarFragment : BaseFragment() {
         calendarViewModel.events.observe(viewLifecycleOwner) { events ->
             binding.customCalendarView.setEvents(events)
             this.events = events
-            initRecycler()
+            showDayEvents()
         }
 
         calendarViewModel.deletedEvent.observe(viewLifecycleOwner) {
@@ -72,7 +74,7 @@ class CalendarFragment : BaseFragment() {
         }
     }
 
-    private fun initRecycler() {
+    private fun showDayEvents() {
         val dayEvents = mutableListOf<Event>()
         for (event in events) {
             val eventDate = Date(event.start)
@@ -87,20 +89,17 @@ class CalendarFragment : BaseFragment() {
             binding.eventsView.visibility = View.VISIBLE
             binding.emptyView.visibility = View.GONE
         }
-        initRecycler(dayEvents)
+        adapter.submitList(dayEvents)
     }
 
-    private fun initRecycler(events: List<Event>) {
+    private fun initEventRecycler() {
         val recyclerView = binding.eventsView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
         recyclerView.isNestedScrollingEnabled = true
-
-        val adapter = EventsAdapter()
         recyclerView.adapter = adapter
-        adapter.submitList(events)
-
         addDividers()
+
         adapter.shotClickListener = { event, _ ->
             navigateExt(CalendarFragmentDirections.actionNavCalendarToNavEvent(event.id))
         }

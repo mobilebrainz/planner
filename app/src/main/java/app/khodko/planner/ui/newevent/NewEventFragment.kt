@@ -61,6 +61,7 @@ class NewEventFragment : BaseFragment() {
 
     private fun initListeners() {
         binding.repeatBtn.setOnClickListener {
+            hideSoftKeyboardExt()
             binding.repeatRadioGroup.isVisible = !binding.repeatRadioGroup.isVisible
         }
 
