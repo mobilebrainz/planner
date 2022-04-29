@@ -44,7 +44,13 @@ class CalendarFragment : BaseFragment() {
         calendarViewModel.loadEvents()
         binding.dateView.text = DateFormat.prettyDateFormat.format(calendarViewModel.clickDate)
         binding.customCalendarView.clickDate = calendarViewModel.clickDate
+        binding.customCalendarView.calendar = calendarViewModel.calendar
         return binding.root
+    }
+
+    override fun onStop() {
+        super.onStop()
+        calendarViewModel.calendar = binding.customCalendarView.calendar
     }
 
     override fun initFab() {

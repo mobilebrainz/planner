@@ -17,6 +17,7 @@ class CalendarViewModel(
 ) : ViewModel() {
 
     var clickDate: Date = Calendar.getInstance(Locale.ENGLISH).time
+    var calendar: Calendar = Calendar.getInstance(Locale.ENGLISH)
 
     private val _events = MutableLiveData<List<Event>>()
     val events: LiveData<List<Event>> = _events

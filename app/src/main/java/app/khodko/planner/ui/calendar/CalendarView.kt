@@ -29,7 +29,7 @@ class CalendarView @JvmOverloads constructor(
 
     private lateinit var adapter: CalendarAdapter
     private val events = mutableListOf<Event>()
-    val calendar: Calendar = Calendar.getInstance(Locale.ENGLISH)
+    var calendar: Calendar = Calendar.getInstance(Locale.ENGLISH)
     var clickDate: Date? = null
 
     private var clickListener: ((date: Date) -> Unit)? = null
