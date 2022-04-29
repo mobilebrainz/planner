@@ -55,7 +55,7 @@ class CalendarFragment : BaseFragment() {
     }
 
     private fun initListeners() {
-        binding.customCalendarView.onClickListener { date ->
+        binding.customCalendarView.onClickListener { date, position ->
             calendarViewModel.clickDate = date
             binding.dateView.text = DateFormat.prettyDateFormat.format(date)
             showDayEvents()
