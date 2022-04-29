@@ -43,6 +43,7 @@ class CalendarFragment : BaseFragment() {
         initEventRecycler()
         calendarViewModel.loadEvents()
         binding.dateView.text = DateFormat.prettyDateFormat.format(calendarViewModel.clickDate)
+        binding.customCalendarView.clickDate = calendarViewModel.clickDate
         return binding.root
     }
 
