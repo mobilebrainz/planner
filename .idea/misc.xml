@@ -10,6 +10,7 @@
         <entry key="..\:/Developing/Projects/Android/Planner/app/src/main/res/menu/activity_main_drawer.xml" value="0.32051282051282054" />
         <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/drawable-v24/calendar_day_border.xml" value="0.1" />
         <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/drawable/calendar_circle.xml" value="0.1" />
         <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/drawable/ic_account_outline_24.xml" value="0.1" />
         <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/drawable/ic_add_24.xml" value="0.1" />
         <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/drawable/ic_arrow_left_24.xml" value="0.1" />
@@ -26,6 +27,8 @@
         <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/drawable/splash_screen.xml" value="0.1" />
         <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/layout/activity_login.xml" value="0.15830800405268491" />
         <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/layout/calendar_cell_layout.xml" value="0.67" />
+        <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/layout/calendar_item.xml" value="0.2563405797101449" />
+        <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/layout/calendar_item2.xml" value="0.2563405797101449" />
         <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/layout/calendar_layout.xml" value="0.5" />
         <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/layout/calendar_view.xml" value="0.2717391304347826" />
         <entry key="..\:/Developing/Projects/Android/planner/app/src/main/res/layout/content_login.xml" value="0.15830800405268491" />

@@ -4,8 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.khodko.planner.R
@@ -28,9 +30,10 @@ class CalendarView @JvmOverloads constructor(
     private lateinit var adapter: CalendarAdapter
     private val events = mutableListOf<Event>()
     val calendar: Calendar = Calendar.getInstance(Locale.ENGLISH)
+    var clickDate: Date? = null
 
-    private var clickListener: ((date: Date, position: Int) -> Unit)? = null
-    fun onClickListener(listener: (date: Date, position: Int) -> Unit) {
+    private var clickListener: ((date: Date) -> Unit)? = null
+    fun onClickListener(listener: (date: Date) -> Unit) {
         clickListener = listener
     }
 
@@ -75,11 +78,26 @@ class CalendarView @JvmOverloads constructor(
         }
 
         gridView.layoutManager = GridLayoutManager(context, 7)
-        adapter = CalendarAdapter(dates, calendar, events)
+        adapter = CalendarAdapter(dates, calendar, events, clickDate)
         gridView.adapter = adapter
 
-        adapter.onClickListener = { date, position ->
-            clickListener?.apply { invoke(date, position) }
+        adapter.onClickListener = { date ->
+            markDay(clickDate, false)
+            clickDate = date
+            markDay(clickDate, true)
+            clickListener?.apply { invoke(date) }
+        }
+    }
+
+    private fun markDay(date: Date?, mark: Boolean) {
+        date?.let { d ->
+            adapter.getPosition(d)?.let { pos ->
+                val view = gridView.layoutManager?.findViewByPosition(pos)
+                view?.apply {
+                    val markView: ImageView = findViewById(R.id.mark_view)
+                    markView.isVisible = mark
+                }
+            }
         }
     }
 

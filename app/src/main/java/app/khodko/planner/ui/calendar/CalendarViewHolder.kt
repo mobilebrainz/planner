@@ -3,8 +3,10 @@ package app.khodko.planner.ui.calendar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import app.khodko.planner.R
 import app.khodko.planner.core.date.DateFormat
@@ -17,16 +19,20 @@ class CalendarViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val cellView: LinearLayout = view.findViewById(R.id.cell_view)
     private val dayView: TextView = view.findViewById(R.id.calendar_day)
     private val eventsView: TextView = view.findViewById(R.id.event_id)
+    private val markView: ImageView = view.findViewById(R.id.mark_view)
     private lateinit var date: Date
+    private lateinit var monthCalendar: Calendar
 
-    fun bind(date: Date, monthCalendar: Calendar, events: List<Event>) {
+    fun bind(date: Date, monthCalendar: Calendar, events: List<Event>, clickDate: Date?) {
         this.date = date
+        this.monthCalendar = monthCalendar
 
-        showDay(monthCalendar)
+        showDay()
+        showClickDay(clickDate)
         showEvents(events)
     }
 
-    private fun showDay(monthCalendar: Calendar) {
+    private fun showDay() {
         val calendar: Calendar = Calendar.getInstance()
         calendar.time = date
         val day = calendar.get(Calendar.DAY_OF_MONTH)
@@ -38,9 +44,8 @@ class CalendarViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         var textColor = R.color.calendarMonthDayTextColor
 
-        val currentDate = DateFormat.dateFormat.format(Calendar.getInstance(Locale.ENGLISH).time)
         val backgroundColor = when {
-            currentDate == DateFormat.dateFormat.format(date) -> {
+            DateFormat.equalDatesByDay(date, Calendar.getInstance(Locale.ENGLISH).time) -> {
                 R.color.calendarCurrentDayColor
             }
             month == currentMonth && year == currentYear -> {
@@ -51,10 +56,19 @@ class CalendarViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 R.color.calendarAnotherDayColor
             }
         }
-        itemView.setBackgroundColor(itemView.context.getColor(backgroundColor))
+        cellView.setBackgroundColor(itemView.context.getColor(backgroundColor))
 
         dayView.text = day.toString()
         dayView.setTextColor(itemView.context.getColor(textColor))
+    }
+
+    private fun showClickDay(clickDate: Date?) {
+        markView.isVisible = false
+        clickDate?.let { d ->
+            if (DateFormat.equalDatesByDay(date, d)) {
+                markView.isVisible = true
+            }
+        }
 
     }
 
