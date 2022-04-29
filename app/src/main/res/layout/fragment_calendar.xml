@@ -21,7 +21,7 @@
             app:cardCornerRadius="12dp"
             app:cardElevation="2dp">
 
-            <app.khodko.planner.ui.calendar.CustomCalendarView
+            <app.khodko.planner.ui.calendar.CalendarView
                 android:id="@+id/custom_calendar_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
